@@ -12,7 +12,7 @@ namespace Core
     /// This converter returns a value dimension (Width or Height) in according of parameter.
     /// The parameter is the With\Height of the parent component; the result is the Width\Height decreased bya specific value
     /// </summary>
-    public class DimensionImageConverter: IValueConverter
+    public class DimensionImageConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -26,7 +26,7 @@ namespace Core
 
                 return dimension - 10;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 CoreLog.Instance.Append($"[{ex.Source}] - {ex.Message} - {ex.StackTrace}", CoreLogType.Error);
 

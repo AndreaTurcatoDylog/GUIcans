@@ -94,12 +94,12 @@
                 <DockPanel Grid.Row="3" VerticalAlignment="Bottom"
                                 HorizontalAlignment="Left"
                                 Margin="0,25,0,25">
-                    <Button Content="{Binding Label_Apply, Source={StaticResource Resources}}" 
+                    <RepeatButton Content="{Binding Label_Apply, Source={StaticResource Resources}}" 
                                     Style="{StaticResource HighlightedPressedButtonStyle}" 
                                     Width="100" Height="40"
                                     Command ="{Binding FilterChangedCommand}"
                                     Margin="17,0,0,0"/>
-                    <Button Content="{Binding Label_Clear, Source={StaticResource Resources}}"   
+                    <RepeatButton Content="{Binding Label_Clear, Source={StaticResource Resources}}"   
                                     Style="{StaticResource HighlightedPressedButtonStyle}" 
                                     Width="100" Height="40"               
                                     Command="{Binding ClearFiltersCommand}"

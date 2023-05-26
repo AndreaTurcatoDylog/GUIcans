@@ -9,7 +9,7 @@ using System.Windows.Shapes;
 
 namespace Core
 {
-    public class CircleResult : IResult
+    public class CircleResult : IImageResult
     {
 
         public int X1 { get; set; }

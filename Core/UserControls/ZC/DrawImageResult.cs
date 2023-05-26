@@ -9,7 +9,7 @@ namespace Core
 {
     public class DrawImageResult
     {
-        #region Fields
+        #region Members
 
         private Canvas _Canvas;
 
@@ -17,19 +17,19 @@ namespace Core
 
         #region Properties
 
-        public List<IResult> _Results { get; private set; }
+        public List<IImageResult> _Results { get; private set; }
 
         #endregion
 
         #region Constructor
 
-        public DrawImageResult(Canvas canvas, List<IResult> results)
+        public DrawImageResult(Canvas canvas, List<IImageResult> results)
         {
             _Results = results;
             _Canvas = canvas;
         }
 
-        public DrawImageResult(Canvas canvas): this(canvas, new List<IResult>())
+        public DrawImageResult(Canvas canvas): this(canvas, new List<IImageResult>())
         {
             
         }
@@ -61,14 +61,14 @@ namespace Core
         /// <summary>
         /// Add a result
         /// </summary>
-        public void AddResult(IResult result) {
+        public void AddResult(IImageResult result) {
             _Results.Add(result);
         }
 
         /// <summary>
         /// Add a list of results
         /// </summary>
-        public void AddResults(IEnumerable<IResult> results)
+        public void AddResults(IEnumerable<IImageResult> results)
         {
             _Results.AddRange(results);
         }

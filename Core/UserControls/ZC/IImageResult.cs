@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace Core
 {
-    internal enum ZoomMode
+    public interface IImageResult
     {
-        ZoomIn = 0,
-        ZoomOut = 1
+        void Draw(Canvas canvas);
     }
 }

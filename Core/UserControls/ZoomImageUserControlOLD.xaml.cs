@@ -11,23 +11,23 @@ using System.Windows.Media.Imaging;
 
 namespace Core
 {
-    /// <summary>
-    /// Ths Point EventArgs
-    /// </summary>
-    public class PointEventArgs : EventArgs
-    {
-        public Point Coordinates { get; private set; }
+    ///// <summary>
+    ///// Ths Point EventArgs
+    ///// </summary>
+    //public class PointEventArgs : EventArgs
+    //{
+    //    public Point Coordinates { get; private set; }
 
-        public PointEventArgs(Point coordinates)
-        {
-            Coordinates = coordinates;
-        }
-    }
+    //    public PointEventArgs(Point coordinates)
+    //    {
+    //        Coordinates = coordinates;
+    //    }
+    //}
 
     /// <summary>
     /// Interaction logic for ZoomImageUserControl.xaml
     /// </summary>
-    public partial class ZoomImageUserControl : DisposableUserControlBase
+    public partial class ZoomImageUserControlOLD : DisposableUserControlBase
     {
         #region Constants
 
@@ -125,7 +125,7 @@ namespace Core
         }
 
         private static readonly DependencyProperty ScrollViewerProperty =
-          DependencyProperty.Register("ScrollViewer", typeof(ScrollViewer), typeof(ZoomImageUserControl));
+          DependencyProperty.Register("ScrollViewer", typeof(ScrollViewer), typeof(ZoomImageUserControlOLD));
 
 
         /// <summary>
@@ -269,58 +269,58 @@ namespace Core
         #region Dependency Properties
 
         private static readonly DependencyProperty CanChooseCoordinatesProperty =
-          DependencyProperty.Register("CanChooseCoordinates", typeof(bool), typeof(ZoomImageUserControl), new PropertyMetadata(false));
+          DependencyProperty.Register("CanChooseCoordinates", typeof(bool), typeof(ZoomImageUserControlOLD), new PropertyMetadata(false));
 
         private static readonly DependencyProperty CoordinateMessageProperty =
-          DependencyProperty.Register("CoordinateMessage", typeof(string), typeof(ZoomImageUserControl), new PropertyMetadata(string.Empty));
+          DependencyProperty.Register("CoordinateMessage", typeof(string), typeof(ZoomImageUserControlOLD), new PropertyMetadata(string.Empty));
 
         private static readonly DependencyProperty HorizontalCoordinateInImageProperty =
-          DependencyProperty.Register("HorizontalCoordinateInImage", typeof(string), typeof(ZoomImageUserControl), new PropertyMetadata(string.Empty));
+          DependencyProperty.Register("HorizontalCoordinateInImage", typeof(string), typeof(ZoomImageUserControlOLD), new PropertyMetadata(string.Empty));
 
         private static readonly DependencyProperty VerticalCoordinateInImageProperty =
-          DependencyProperty.Register("VerticalCoordinateInImage", typeof(string), typeof(ZoomImageUserControl), new PropertyMetadata(string.Empty));
+          DependencyProperty.Register("VerticalCoordinateInImage", typeof(string), typeof(ZoomImageUserControlOLD), new PropertyMetadata(string.Empty));
 
         private static readonly DependencyProperty ImageSourceProperty =
-          DependencyProperty.Register("ImageSource", typeof(WriteableBitmap), typeof(ZoomImageUserControl),
+          DependencyProperty.Register("ImageSource", typeof(WriteableBitmap), typeof(ZoomImageUserControlOLD),
                 new PropertyMetadata(OnImageSourceChangedCallBack));
 
         private static readonly DependencyProperty ResultsSourceProperty =
-          DependencyProperty.Register("ResultsSource", typeof(WriteableBitmap), typeof(ZoomImageUserControl),
+          DependencyProperty.Register("ResultsSource", typeof(WriteableBitmap), typeof(ZoomImageUserControlOLD),
                 new PropertyMetadata(OnResultSourceChangedCallBack));
 
         private static readonly DependencyProperty ScalarZoomXProperty =
-            DependencyProperty.Register("ScalarZoomX", typeof(double), typeof(ZoomImageUserControl), new PropertyMetadata(1.0));
+            DependencyProperty.Register("ScalarZoomX", typeof(double), typeof(ZoomImageUserControlOLD), new PropertyMetadata(1.0));
 
         private static readonly DependencyProperty ScalarZoomYProperty =
-           DependencyProperty.Register("ScalarZoomY", typeof(double), typeof(ZoomImageUserControl), new PropertyMetadata(1.0));
+           DependencyProperty.Register("ScalarZoomY", typeof(double), typeof(ZoomImageUserControlOLD), new PropertyMetadata(1.0));
 
         private static readonly DependencyProperty HorizontalRulersVisibilityProperty =
-            DependencyProperty.Register("HorizontalRulersVisibility", typeof(Visibility), typeof(ZoomImageUserControl), new PropertyMetadata(Visibility.Visible));
+            DependencyProperty.Register("HorizontalRulersVisibility", typeof(Visibility), typeof(ZoomImageUserControlOLD), new PropertyMetadata(Visibility.Visible));
 
         private static readonly DependencyProperty VerticalRulersVisibilityProperty =
-            DependencyProperty.Register("VerticalRulersVisibility", typeof(Visibility), typeof(ZoomImageUserControl), new PropertyMetadata(Visibility.Visible));
+            DependencyProperty.Register("VerticalRulersVisibility", typeof(Visibility), typeof(ZoomImageUserControlOLD), new PropertyMetadata(Visibility.Visible));
 
         private static readonly DependencyProperty HorizontalRuleMarginProperty =
-           DependencyProperty.Register("HorizontalRuleMargin", typeof(string), typeof(ZoomImageUserControl));
+           DependencyProperty.Register("HorizontalRuleMargin", typeof(string), typeof(ZoomImageUserControlOLD));
 
         private static readonly DependencyProperty VerticalRuleMarginProperty =
-           DependencyProperty.Register("VerticalRuleMargin", typeof(string), typeof(ZoomImageUserControl));
+           DependencyProperty.Register("VerticalRuleMargin", typeof(string), typeof(ZoomImageUserControlOLD));
 
         private static readonly DependencyProperty ResultImagesMarginProperty =
-          DependencyProperty.Register("ResultImagesMargin", typeof(string), typeof(ZoomImageUserControl));
+          DependencyProperty.Register("ResultImagesMargin", typeof(string), typeof(ZoomImageUserControlOLD));
 
         private static readonly DependencyProperty RefreshProperty =
-          DependencyProperty.Register("Refresh", typeof(bool), typeof(ZoomImageUserControl),
+          DependencyProperty.Register("Refresh", typeof(bool), typeof(ZoomImageUserControlOLD),
         new PropertyMetadata(OnRefreshRequestCallBack));
 
         private static readonly DependencyProperty MouseXProperty =
-          DependencyProperty.Register("MouseX", typeof(double), typeof(ZoomImageUserControl));
+          DependencyProperty.Register("MouseX", typeof(double), typeof(ZoomImageUserControlOLD));
 
         private static readonly DependencyProperty MouseYProperty =
-          DependencyProperty.Register("MouseY", typeof(double), typeof(ZoomImageUserControl));
+          DependencyProperty.Register("MouseY", typeof(double), typeof(ZoomImageUserControlOLD));
 
         private static readonly DependencyProperty IsZoomEnabledProperty =
-         DependencyProperty.Register("IsZoomEnabled", typeof(bool), typeof(ZoomImageUserControl));
+         DependencyProperty.Register("IsZoomEnabled", typeof(bool), typeof(ZoomImageUserControlOLD));
 
         #endregion
 
@@ -329,7 +329,7 @@ namespace Core
         /// <summary>
         /// Constructor
         /// </summary>
-        public ZoomImageUserControl()
+        public ZoomImageUserControlOLD()
         {
             InitializeComponent();
 
@@ -960,7 +960,7 @@ namespace Core
         private static void OnRefreshRequestCallBack(
         DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            if (sender is ZoomImageUserControl c)
+            if (sender is ZoomImageUserControlOLD c)
             {
                 if (c.Refresh)
                 {
@@ -975,7 +975,7 @@ namespace Core
         private static void OnImageSourceChangedCallBack(
         DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            if (sender is ZoomImageUserControl c)
+            if (sender is ZoomImageUserControlOLD c)
             {
                 if (c.ImageSource != null)
                 {
@@ -1001,7 +1001,7 @@ namespace Core
         private static void OnResultSourceChangedCallBack(
         DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            if (sender is ZoomImageUserControl c)
+            if (sender is ZoomImageUserControlOLD c)
             {
                 //ResultsSource = new WriteableBitmap((int)widthBorderImage, (int)heightBorderImage, 96d, 96d, PixelFormats.Bgra32, null);
                 //c.ResultsSource.SetValue(c.ResultsSource.PixelWidth, (int)c.widthBorderImage);

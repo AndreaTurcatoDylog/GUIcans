@@ -146,6 +146,18 @@
     <Compile Include="UserControls\LanguageManager\LanguageManagerUserControl.xaml.cs">
       <DependentUpon>LanguageManagerUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ZC\CircleResult.cs" />
+    <Compile Include="UserControls\ZC\DimensionImageConverter.cs" />
+    <Compile Include="UserControls\ZC\DrawImageResult.cs" />
+    <Compile Include="UserControls\ZC\IImageResult.cs" />
+    <Compile Include="UserControls\ZC\PixelsResult.cs" />
+    <Compile Include="UserControls\ZC\RectangleResult.cs" />
+    <Compile Include="UserControls\ZC\ZoomImageControlValues.cs" />
+    <Compile Include="UserControls\ZC\ZoomImagePositionValuesEventArgs.cs" />
+    <Compile Include="UserControls\ZC\ZoomImageUserControl.xaml.cs">
+      <DependentUpon>ZoomImageUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ZC\ZoomMode.cs" />
     <Compile Include="Windows\NavigatorFolderDialog\Classes\AESCryptography.cs" />
     <Compile Include="Windows\NavigatorFolderDialog\Classes\FolderCredentialResult.cs" />
     <Compile Include="Windows\NavigatorFolderDialog\Classes\GoToNavigatorFolder.cs" />
@@ -186,7 +198,6 @@
     <Compile Include="Converters\DynamicMessages\PanelWidthConverter.cs" />
     <Compile Include="Converters\CircularProgressBar\ProgressToAngleConverter.cs" />
     <Compile Include="Converters\RadioBoolToIntConverter.cs" />
-    <Compile Include="Converters\ZoomImageUserControl\DimensionImageConverter.cs" />
     <Compile Include="CustomControls\AdjustablePanel.cs" />
     <Compile Include="CustomControls\CalendarTextBoxKeyboard.cs" />
     <Compile Include="CustomControls\ImageButton.cs" />
@@ -208,7 +219,6 @@
     <Compile Include="Enums\GenericMessageType.cs" />
     <Compile Include="Enums\PaginationButtonType.cs" />
     <Compile Include="Enums\SystemStatus.cs" />
-    <Compile Include="Enums\ZoomImageUserControl\ZoomMode.cs" />
     <Compile Include="EventArgs\CultureInfoEventArgs.cs" />
     <Compile Include="EventArgs\Keyboard\KeyboardButtonEventArgs.cs" />
     <Compile Include="EventArgs\Parameters\ParameterContainerUpdatedEventArgs.cs" />
@@ -225,11 +235,8 @@
     <Compile Include="Factories\MessageBoxTypeFactory.cs" />
     <Compile Include="Factories\Pagination\PaginationButtonFactory.cs" />
     <Compile Include="Models\Arc.cs" />
-    <Compile Include="Models\ImageResults\CircleResult.cs" />
-    <Compile Include="Models\ImageResults\DrawImageResult.cs" />
     <Compile Include="Models\ImageResults\IImageResults.cs" />
     <Compile Include="Models\ImageResults\IResult.cs" />
-    <Compile Include="Models\ImageResults\RectangleResult.cs" />
     <Compile Include="Models\KeyboardLayout.cs" />
     <Compile Include="Models\Messages\GenericMessage.cs" />
     <Compile Include="Models\Messages\IMessageItem.cs" />
@@ -308,8 +315,8 @@
     <Compile Include="UserControls\SpinningProgressBar.xaml.cs">
       <DependentUpon>SpinningProgressBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ZoomImageUserControl.xaml.cs">
-      <DependentUpon>ZoomImageUserControl.xaml</DependentUpon>
+    <Compile Include="UserControls\ZoomImageUserControlOLD.xaml.cs">
+      <DependentUpon>ZoomImageUserControlOLD.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\BlockedKeyboardWindow.xaml.cs">
       <DependentUpon>BlockedKeyboardWindow.xaml</DependentUpon>
@@ -464,7 +471,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\ZoomImageUserControl.xaml">
+    <Page Include="UserControls\ZC\ZoomImageUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ZoomImageUserControlOLD.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -578,6 +589,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\France.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Converters\ZoomImageUserControl\" />
+    <Folder Include="Enums\ZoomImageUserControl\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
