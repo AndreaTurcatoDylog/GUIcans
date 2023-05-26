@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Caption_Select_The_Images_Folder" xml:space="preserve">
+    <value>Sélectionnez le dossier avec les images</value>
+  </data>
+  <data name="Label_Action" xml:space="preserve">
+    <value>Action:</value>
+  </data>
+  <data name="Label_Back" xml:space="preserve">
+    <value>En arrière</value>
+  </data>
+  <data name="Label_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Label_Cause" xml:space="preserve">
+    <value>Cause:</value>
+  </data>
+  <data name="Label_Create_Report" xml:space="preserve">
+    <value>Creer un rapp..</value>
+  </data>
+  <data name="Label_Credential_Connection" xml:space="preserve">
+    <value>Connectez-vous au dossier réseau</value>
+  </data>
+  <data name="Label_Date_Time" xml:space="preserve">
+    <value>Date et l'heure:</value>
+  </data>
+  <data name="Label_Disabled" xml:space="preserve">
+    <value>Désactivé</value>
+  </data>
+  <data name="Label_Domain" xml:space="preserve">
+    <value>Domaine</value>
+  </data>
+  <data name="Label_Enabled" xml:space="preserve">
+    <value>Qualifié</value>
+  </data>
+  <data name="Label_Error" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="Label_Exit" xml:space="preserve">
+    <value>SORTIR</value>
+  </data>
+  <data name="Label_File_Name" xml:space="preserve">
+    <value>Nom de fichier:</value>
+  </data>
+  <data name="Label_Filter" xml:space="preserve">
+    <value>Filtre</value>
+  </data>
+  <data name="Label_Filters" xml:space="preserve">
+    <value>Filtres:</value>
+  </data>
+  <data name="Label_Find" xml:space="preserve">
+    <value>Rechercher</value>
+  </data>
+  <data name="Label_Friendly_Name" xml:space="preserve">
+    <value>Lien vers les ressources</value>
+  </data>
+  <data name="Label_From_Date" xml:space="preserve">
+    <value>Date de début</value>
+  </data>
+  <data name="Label_Home" xml:space="preserve">
+    <value>Début</value>
+  </data>
+  <data name="Label_Images" xml:space="preserve">
+    <value>Images:</value>
+  </data>
+  <data name="Label_Imagine" xml:space="preserve">
+    <value>IMAGE</value>
+  </data>
+  <data name="Label_Insert_Credentials" xml:space="preserve">
+    <value>Entrez les identifiants du réseau</value>
+  </data>
+  <data name="Label_Loading_Images" xml:space="preserve">
+    <value>Chargement des images ...</value>
+  </data>
+  <data name="Label_Model" xml:space="preserve">
+    <value>Modèle</value>
+  </data>
+  <data name="Label_No" xml:space="preserve">
+    <value>Non</value>
+  </data>
+  <data name="Label_Number_Article" xml:space="preserve">
+    <value>Article n°:</value>
+  </data>
+  <data name="Label_Number_Lot" xml:space="preserve">
+    <value>Numéro de lot:</value>
+  </data>
+  <data name="Label_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Label_Password" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="Label_Reject_Time" xml:space="preserve">
+    <value>Date de rejet:</value>
+  </data>
+  <data name="Label_Reset" xml:space="preserve">
+    <value>Réinitialiser</value>
+  </data>
+  <data name="Label_Retry" xml:space="preserve">
+    <value>Réessayer.</value>
+  </data>
+  <data name="Label_Save" xml:space="preserve">
+    <value>Sauver</value>
+  </data>
+  <data name="Label_Save_credentials" xml:space="preserve">
+    <value>Enregistrer les identifiants</value>
+  </data>
+  <data name="Label_Save_In" xml:space="preserve">
+    <value>Enregistrer dans</value>
+  </data>
+  <data name="Label_SharedFolder" xml:space="preserve">
+    <value>Chemin du dossier</value>
+  </data>
+  <data name="Label_To_Date" xml:space="preserve">
+    <value>Date de fin</value>
+  </data>
+  <data name="Label_Username" xml:space="preserve">
+    <value>Nom d'utilisateur</value>
+  </data>
+  <data name="Label_Warning" xml:space="preserve">
+    <value>Remarquer!</value>
+  </data>
+  <data name="Label_Yes" xml:space="preserve">
+    <value>Oui</value>
+  </data>
+  <data name="Messager_Error_Bad_Netpath" xml:space="preserve">
+    <value>Le chemin réseau n'a pas été trouvé</value>
+  </data>
+  <data name="Message_Creating_Report" xml:space="preserve">
+    <value>Création de rapport en cours</value>
+  </data>
+  <data name="Message_Creating_Report_Error" xml:space="preserve">
+    <value>Le rapport n'a pas été créé: {0}</value>
+  </data>
+  <data name="MESSAGE_ERROR_ACCESS_DENIED" xml:space="preserve">
+    <value>Accès refusé</value>
+  </data>
+  <data name="MESSAGE_ERROR_ACCOUNT_LOCKED_OUT" xml:space="preserve">
+    <value>Le compte est bloqué.</value>
+  </data>
+  <data name="MESSAGE_ERROR_BAD_NET_NAME" xml:space="preserve">
+    <value>Le nom du réseau est introuvable</value>
+  </data>
+  <data name="Message_Error_Bad_Username" xml:space="preserve">
+    <value>Le nom d'utilisateur saisi n'est pas valide.</value>
+  </data>
+  <data name="MESSAGE_ERROR_DOMAIN_CONTROLLER_NOT_FOUND" xml:space="preserve">
+    <value>Le contrôleur de domaine de ce domaine est introuvable.</value>
+  </data>
+  <data name="Message_Error_Invalid_Password" xml:space="preserve">
+    <value>Le mot de passe réseau entré n'est pas valide.</value>
+  </data>
+  <data name="Message_Error_Logon" xml:space="preserve">
+    <value>Échec de la connexion: nom d'utilisateur inconnu ou mot de passe incorrect.</value>
+  </data>
+  <data name="MESSAGE_ERROR_PATH_NOT_FOUND" xml:space="preserve">
+    <value>Le système ne peut pas ouvrir le chemin spécifié. Essayez de vérifier vos informations d'identification.</value>
+  </data>
+  <data name="Message_File_Corrupted" xml:space="preserve">
+    <value>Le fichier "{0}" est corrompu. Un nouveau fichier sera créé avec des valeurs standard</value>
+  </data>
+  <data name="Message_File_Missing_OR_Corrupted" xml:space="preserve">
+    <value>Le fichier "{0}" est manquant ou corrompu. L'application ne peut pas démarrer. Veuillez créer un nouveau fichier "{0}" et réessayer.</value>
+  </data>
+  <data name="Message_Images_Files_Not_Found" xml:space="preserve">
+    <value>Images introuvables dans {0}. Cochez les options Dossier ou Images</value>
+  </data>
+  <data name="Message_Images_Not_Found" xml:space="preserve">
+    <value>Images non trouvées</value>
+  </data>
+  <data name="Message_Image_Not_Found_With_Applied_Filter" xml:space="preserve">
+    <value>Images introuvables avec les filtres appliqués</value>
+  </data>
+  <data name="Message_Path_Not_Exists" xml:space="preserve">
+    <value>Erreur: le chemin "{0}" n'existe pas!</value>
+  </data>
+  <data name="Message_Report_Created_Successfully" xml:space="preserve">
+    <value>Le rapport a été créé avec succès</value>
+  </data>
+  <data name="Message_Save_Modified_Parameters" xml:space="preserve">
+    <value>Enregistrer les paramètres modifiés?</value>
+  </data>
+  <data name="Message_Unknown_Error" xml:space="preserve">
+    <value>Erreur inconnue.</value>
+  </data>
+  <data name="Message_Warning" xml:space="preserve">
+    <value>Attention: {0}</value>
+  </data>
+  <data name="Message_Warning_Path_Not_Exists" xml:space="preserve">
+    <value>Enregistrement à l'emplacement par défaut.</value>
+  </data>
+  <data name="Label_Add" xml:space="preserve">
+    <value>AJOUTER</value>
+  </data>
+  <data name="Label_Select" xml:space="preserve">
+    <value>SÉLECT..</value>
+  </data>
+  <data name="Label_Up" xml:space="preserve">
+    <value>PAR-DE..</value>
+  </data>
+  <data name="Label_Connecting" xml:space="preserve">
+    <value>Lien</value>
+  </data>
+  <data name="Label_Modify" xml:space="preserve">
+    <value>MODIF...</value>
+  </data>
+  <data name="Label_Remove" xml:space="preserve">
+    <value>RETIRER</value>
+  </data>
+  <data name="Message_Can_Not_Open_Folder" xml:space="preserve">
+    <value>Impossible d'ouvrir le chemin spécifié</value>
+  </data>
+  <data name="Label_Go_To" xml:space="preserve">
+    <value>Aller à</value>
+  </data>
+  <data name="Label_Path" xml:space="preserve">
+    <value>Path</value>
+  </data>
+  <data name="Label_Create_Shortcut" xml:space="preserve">
+    <value>Créer un raccourci</value>
+  </data>
+  <data name="Message_Empty_Path" xml:space="preserve">
+    <value>Aucun chemin n'a été spécifié.</value>
+  </data>
+  <data name="Label_Select_Report_Destination" xml:space="preserve">
+    <value>Sélectionnez la destination du rapport</value>
+  </data>
+  <data name="Label_Number_Of_Images" xml:space="preserve">
+    <value>Nb d’images:</value>
+  </data>
+  <data name="Label_Additional" xml:space="preserve">
+    <value>Supplémentaire:</value>
+  </data>
+  <data name="Message_Filter_Not_Applied" xml:space="preserve">
+    <value>Filtres non appliqués! Appuyez sur Entrée dans une zone de texte pour les appliquer.</value>
+  </data>
+  <data name="Message_Filter_Applied" xml:space="preserve">
+    <value>Filtres appliqués</value>
+  </data>
+  <data name="Message_Reset_Filter" xml:space="preserve">
+    <value>Cliquez pour réinitialiser les filtres</value>
+  </data>
+  <data name="Message_Multiple_Connection" xml:space="preserve">
+    <value>Les connexions multiples à un serveur ou à une ressource partagée par le même utilisateur, en utilisant plus d'un nom d'utilisateur, ne sont pas autorisées. Déconnectez toutes les connexions précédentes au serveur ou à la ressource partagée et réessayez</value>
+  </data>
+  <data name="Label_English" xml:space="preserve">
+    <value>ANGLAIS</value>
+  </data>
+  <data name="Label_Italy" xml:space="preserve">
+    <value>ITALIEN</value>
+  </data>
+  <data name="Label_USA" xml:space="preserve">
+    <value>USA</value>
+  </data>
+  <data name="Label_France" xml:space="preserve">
+    <value>FRANCAIS</value>
+  </data>
+  <data name="Label_Apply" xml:space="preserve">
+    <value>Appliquer</value>
+  </data>
+  <data name="Label_Options" xml:space="preserve">
+    <value>Choix</value>
+  </data>
+  <data name="Label_Language" xml:space="preserve">
+    <value>Langue</value>
+  </data>
+  <data name="Label_Images_Title" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="Label_Image_Subtitle" xml:space="preserve">
+    <value>images de sous-titres</value>
+  </data>
+  <data name="Label_Subtitle" xml:space="preserve">
+    <value>Sous-titre</value>
+  </data>
+  <data name="Label_Title" xml:space="preserve">
+    <value>Titre</value>
+  </data>
+  <data name="Label_Report" xml:space="preserve">
+    <value>Signaler</value>
+  </data>
+  <data name="Label_Rotation" xml:space="preserve">
+    <value>Rotation</value>
+  </data>
+  <data name="Label_Title_Filters" xml:space="preserve">
+    <value>Filtres</value>
+  </data>
+  <data name="Label_Open_Report_After_Created" xml:space="preserve">
+    <value>Ouvrir le rapport créé</value>
+  </data>
+  <data name="Label_Logo" xml:space="preserve">
+    <value>Logo</value>
+  </data>
+  <data name="Label_Comments" xml:space="preserve">
+    <value>Commentaires</value>
+  </data>
+  <data name="Label_Pages" xml:space="preserve">
+    <value>Pages:</value>
+  </data>
+  <data name="Label_Title_Page" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="Message_Reports_Partioned" xml:space="preserve">
+    <value>{0} documents seront créés chacun avec un maximum de 1000 images</value>
+  </data>
+  <data name="Label_Confirm" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+</root>

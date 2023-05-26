@@ -1,0 +1,583 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7C3BBCB9-475D-43AD-BDB6-4D874F77A88D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Core</RootNamespace>
+    <AssemblyName>Core</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>none</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="PresentationFramework.Aero2">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AttachedProperties\AttachedProperties.cs" />
+    <Compile Include="AttachedProperties\PasswordBoxAssistant.cs" />
+    <Compile Include="Classes\AdjustableWindow.cs" />
+    <Compile Include="Classes\DisposableBaseWindow.cs" />
+    <Compile Include="Classes\DisposableCustomControlBase.cs" />
+    <Compile Include="Classes\DisposableUserControl.cs" />
+    <Compile Include="Classes\DisposableUserControlBase.cs" />
+    <Compile Include="Classes\ExtendedBackgroundWorker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\External Dialog\DialogBaseWindow.cs" />
+    <Compile Include="Classes\External Dialog\DialogServiceBase.cs" />
+    <Compile Include="Classes\External Dialog\ExternalDialogManager.cs" />
+    <Compile Include="Classes\External Dialog\ExternalDialogMessage.cs" />
+    <Compile Include="Classes\External Dialog\IDialogViewModel.cs" />
+    <Compile Include="Classes\Interfaces\IAdjustableFrameworkElement.cs" />
+    <Compile Include="Classes\Interfaces\IElementWithKeyboard.cs" />
+    <Compile Include="Classes\Interfaces\IHasPopUp.cs" />
+    <Compile Include="Classes\Interfaces\Pagination\IPaginationButton.cs" />
+    <Compile Include="Classes\KeyboardBase.cs" />
+    <Compile Include="Classes\Log\CoreLog.cs" />
+    <Compile Include="Classes\SystemInformations.cs" />
+    <Compile Include="Classes\ToolWindow.cs" />
+    <Compile Include="Classes\ViewModelBase.cs" />
+    <Compile Include="Converters\IntToVisibilityConverter.cs" />
+    <Compile Include="Converters\InverseBooleanConverter.cs" />
+    <Compile Include="Converters\MultiBooleanConditionConverter.cs" />
+    <Compile Include="Converters\MultiBooleanConverter.cs" />
+    <Compile Include="Converters\MultiBooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\MultiValueConverter.cs" />
+    <Compile Include="Converters\InfinityToValueConverter.cs" />
+    <Compile Include="Converters\Pagination\ThumbInnerRectangleWidthConverter.cs" />
+    <Compile Include="CustomControls\TabItemClosable.cs" />
+    <Compile Include="CustomControls\TextBoxWatermarks.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ScreenManager\AreaDimension.cs" />
+    <Compile Include="ScreenManager\MonitorInfo.cs" />
+    <Compile Include="ScreenManager\ScreenManager.cs" />
+    <Compile Include="UserControls\DateTimeFiltersUserControl.xaml.cs">
+      <DependentUpon>DateTimeFiltersUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\LanguageManager\Classes\LanguageItem.cs" />
+    <Compile Include="UserControls\LanguageManager\Classes\LanguageToLanguageID.cs" />
+    <Compile Include="UserControls\LanguageManager\Enums\LanguageID.cs" />
+    <Compile Include="UserControls\LanguageManager\LanguageManagerUserControl.xaml.cs">
+      <DependentUpon>LanguageManagerUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\NavigatorFolderDialog\Classes\AESCryptography.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\Classes\FolderCredentialResult.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\Classes\GoToNavigatorFolder.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\Classes\Shares.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\Classes\ConnectToSharedFolder.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\Converter\IsRootToEnabledConverter.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\Converter\NavigatorFolderMultipleValueToEnabledConverter.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\Converter\OkButtonEnabledConverter.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\Converter\SelectedRootConverter.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\Converter\SelectedRootToVisiblityConverter.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\Enums\DirectoryExistsResult.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\FolderCredentials.xaml.cs">
+      <DependentUpon>FolderCredentials.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\NavigatorFolderDialog\FavoriteFolderDetails.xaml.cs">
+      <DependentUpon>FavoriteFolderDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\NavigatorFolderDialog\Enums\ResourceDisplaytypeEnum.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\Enums\ResourceScopeEnum.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\Enums\ResourceTypeEnum.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\FavoriteFolderDetailsViewModel.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\Classes\FavoriteFolder.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\Classes\FavoritesNavigatorFolder.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\Classes\INavigatorFolder.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\Classes\NavigationDialogItem.cs" />
+    <Compile Include="Classes\NavigationDisposableUserControl.cs" />
+    <Compile Include="Classes\RelayCommand.cs" />
+    <Compile Include="Classes\TextBoxKeyboardBase.cs" />
+    <Compile Include="Converters\BooleanConverter.cs" />
+    <Compile Include="Converters\BooleanToColorConverter.cs" />
+    <Compile Include="Converters\BooleanToEnabledConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\BoolToBitConverter.cs" />
+    <Compile Include="Converters\BoolToOnOffConverter.cs" />
+    <Compile Include="Converters\LabelToLanguageTextConverter.cs" />
+    <Compile Include="Converters\MultiValueEqualityConverter.cs" />
+    <Compile Include="Converters\DynamicMessages\PanelMarginConverter.cs" />
+    <Compile Include="Converters\DynamicMessages\PanelWidthConverter.cs" />
+    <Compile Include="Converters\CircularProgressBar\ProgressToAngleConverter.cs" />
+    <Compile Include="Converters\RadioBoolToIntConverter.cs" />
+    <Compile Include="Converters\ZoomImageUserControl\DimensionImageConverter.cs" />
+    <Compile Include="CustomControls\AdjustablePanel.cs" />
+    <Compile Include="CustomControls\CalendarTextBoxKeyboard.cs" />
+    <Compile Include="CustomControls\ImageButton.cs" />
+    <Compile Include="CustomControls\ImagePaginationButton.cs" />
+    <Compile Include="CustomControls\NumericTextBoxKeyboard.cs" />
+    <Compile Include="CustomControls\PaginationButton.cs" />
+    <Compile Include="CustomControls\PaginationSettingButton.cs" />
+    <Compile Include="CustomControls\PaginationSettingContainerButton.cs" />
+    <Compile Include="CustomControls\PathTrimTextBlock.cs" />
+    <Compile Include="CustomControls\TextBoxKeyboard.cs" />
+    <Compile Include="CustomControls\ToggleButtonActive.cs" />
+    <Compile Include="Enums\ButtonResult.cs" />
+    <Compile Include="Enums\CoreLogType.cs" />
+    <Compile Include="Enums\KeyboardButtonType.cs" />
+    <Compile Include="Enums\KeyboardLayoutType.cs" />
+    <Compile Include="Enums\MessageBoxButtonsType.cs" />
+    <Compile Include="Enums\MessageBoxResult.cs" />
+    <Compile Include="Enums\MessageBoxType.cs" />
+    <Compile Include="Enums\GenericMessageType.cs" />
+    <Compile Include="Enums\PaginationButtonType.cs" />
+    <Compile Include="Enums\SystemStatus.cs" />
+    <Compile Include="Enums\ZoomImageUserControl\ZoomMode.cs" />
+    <Compile Include="EventArgs\CultureInfoEventArgs.cs" />
+    <Compile Include="EventArgs\Keyboard\KeyboardButtonEventArgs.cs" />
+    <Compile Include="EventArgs\Parameters\ParameterContainerUpdatedEventArgs.cs" />
+    <Compile Include="EventArgs\Settings\SettingLinkEventArgs.cs" />
+    <Compile Include="EventArgs\Settings\SettingUpdatedEventArgs.cs" />
+    <Compile Include="EventArgs\Settings\SettingValueEventArgs.cs" />
+    <Compile Include="EventArgs\ShowKeyboardEventArgs.cs" />
+    <Compile Include="EventArgs\TextBoxKeyboardKeyPressedEventArgs.cs" />
+    <Compile Include="EventArgs\WritingModeEventArgs.cs" />
+    <Compile Include="Exceptions\ExtendedBackgroundWorkerAbortedException.cs" />
+    <Compile Include="ExtensionMethods\ExtensionMethods.cs" />
+    <Compile Include="Factories\KeyboardFactory.cs" />
+    <Compile Include="Factories\MessageBoxButtonsFactory.cs" />
+    <Compile Include="Factories\MessageBoxTypeFactory.cs" />
+    <Compile Include="Factories\Pagination\PaginationButtonFactory.cs" />
+    <Compile Include="Models\Arc.cs" />
+    <Compile Include="Models\ImageResults\CircleResult.cs" />
+    <Compile Include="Models\ImageResults\DrawImageResult.cs" />
+    <Compile Include="Models\ImageResults\IImageResults.cs" />
+    <Compile Include="Models\ImageResults\IResult.cs" />
+    <Compile Include="Models\ImageResults\RectangleResult.cs" />
+    <Compile Include="Models\KeyboardLayout.cs" />
+    <Compile Include="Models\Messages\GenericMessage.cs" />
+    <Compile Include="Models\Messages\IMessageItem.cs" />
+    <Compile Include="Models\ModelBase.cs" />
+    <Compile Include="Models\Parameters\IParameter.cs" />
+    <Compile Include="Models\Parameters\ParameterEmpty.cs" />
+    <Compile Include="Models\Parameters\ParameterNumeric.cs" />
+    <Compile Include="Models\Settings\ISettingItem.cs" />
+    <Compile Include="Models\Settings\ISettingWithValue.cs" />
+    <Compile Include="Models\Settings\Options\SettingNumericOption.cs" />
+    <Compile Include="Models\Settings\SettingBit.cs" />
+    <Compile Include="Models\Settings\SettingBitNumber.cs" />
+    <Compile Include="Models\Settings\SettingBoolean.cs" />
+    <Compile Include="Models\Settings\SettingChecked.cs" />
+    <Compile Include="Models\Settings\SettingEnum.cs" />
+    <Compile Include="Models\Settings\SettingItemBase.cs" />
+    <Compile Include="Models\Settings\SettingLink.cs" />
+    <Compile Include="Models\Settings\SettingLinkBase.cs" />
+    <Compile Include="Models\Settings\SettingLinkBitContainer.cs" />
+    <Compile Include="Models\Settings\SettingLinkCommonSingleChoiseContainer.cs" />
+    <Compile Include="Models\Settings\SettingLinkSingleChoiseContainer.cs" />
+    <Compile Include="Models\Settings\SettingLinkUp.cs" />
+    <Compile Include="Models\Settings\SettingLinkWithValueBase.cs" />
+    <Compile Include="Models\Settings\SettingNumeric.cs" />
+    <Compile Include="Models\Settings\SettingNumericItemBase.cs" />
+    <Compile Include="Models\Settings\SettingRadioList.cs" />
+    <Compile Include="Models\Settings\SettingsDataTemplateSelector.cs" />
+    <Compile Include="Models\Settings\SettingText.cs" />
+    <Compile Include="Models\Settings\SettingWithValue.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceManager\Cultures\CultureResources.cs" />
+    <Compile Include="ResourceManager\Cultures\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceManager\Settings.cs" />
+    <Compile Include="UserControls\DelayButtonUserControl.xaml.cs">
+      <DependentUpon>DelayButtonUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DynamicBitNumberSettings.xaml.cs">
+      <DependentUpon>DynamicBitNumberSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DynamicMessages\DynamicMessages.xaml.cs">
+      <DependentUpon>DynamicMessages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DynamicParameters.xaml.cs">
+      <DependentUpon>DynamicParameters.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DynamicRadioListSettings.xaml.cs">
+      <DependentUpon>DynamicRadioListSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DynamicSettings.xaml.cs">
+      <DependentUpon>DynamicSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\IpAddressInput.xaml.cs">
+      <DependentUpon>IpAddressInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\NumericSliderUpDown.xaml.cs">
+      <DependentUpon>NumericSliderUpDown.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Pagination\NavigationPager.xaml.cs">
+      <DependentUpon>NavigationPager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Pagination\PaginationUserControl.xaml.cs">
+      <DependentUpon>PaginationUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SettingNavigator.xaml.cs">
+      <DependentUpon>SettingNavigator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SpinningProgressBar.xaml.cs">
+      <DependentUpon>SpinningProgressBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ZoomImageUserControl.xaml.cs">
+      <DependentUpon>ZoomImageUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\BlockedKeyboardWindow.xaml.cs">
+      <DependentUpon>BlockedKeyboardWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\BlockedTrasparentWindow.xaml.cs">
+      <DependentUpon>BlockedTrasparentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\CalendarKeyboard.xaml.cs">
+      <DependentUpon>CalendarKeyboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\CustomMessageBox.xaml.cs">
+      <DependentUpon>CustomMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\NavigatorFolderDialog\FolderCredentialsViewModel.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\NavigationFolderDialog.xaml.cs">
+      <DependentUpon>NavigationFolderDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\NavigatorFolderDialog\Classes\NavigatorFolderBase.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\Classes\NetNavigatorFolder.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\Classes\PCNavigatorFolder.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\Classes\NavigatorFolderFactory.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\Classes\RootItem.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\Enums\NavigatorFolderType.cs" />
+    <Compile Include="Windows\NavigatorFolderDialog\NavigationFolderDialogViewModel.cs" />
+    <Compile Include="Windows\NumericKeyboard.xaml.cs">
+      <DependentUpon>NumericKeyboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\PasswordMessageBox.xaml.cs">
+      <DependentUpon>PasswordMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\PinMessageBox.xaml.cs">
+      <DependentUpon>PinMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\StandardKeyboard.xaml.cs">
+      <DependentUpon>StandardKeyboard.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="ResourceManager\ResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\DatePickerStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\CustomTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\ListViewStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\BorderStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\ButtonStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\CustomControlsStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Global.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Gradiants.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\KeyboardsStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\MessageBoxStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\ProgressBarStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\FiltersStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\ScrollBarStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\DateTimeFiltersUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\DelayButtonUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\DynamicBitNumberSettings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\DynamicMessages\DynamicMessages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\DynamicParameters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\DynamicRadioListSettings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\DynamicSettings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\IpAddressInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\LanguageManager\LanguageManagerUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\NumericSliderUpDown.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Pagination\NavigationPager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Pagination\PaginationUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\SettingNavigator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\SpinningProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ZoomImageUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\BlockedKeyboardWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\BlockedTrasparentWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\CalendarKeyboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\CustomMessageBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\NavigatorFolderDialog\FolderCredentials.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\NavigatorFolderDialog\FavoriteFolderDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\NavigatorFolderDialog\NavigationFolderDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\NumericKeyboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\PasswordMessageBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\PinMessageBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\StandardKeyboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceManager\Cultures\Resources.de.resx" />
+    <EmbeddedResource Include="ResourceManager\Cultures\Resources.en.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceManager\Cultures\Resources.fr.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceManager\Cultures\Resources.hr.resx" />
+    <EmbeddedResource Include="ResourceManager\Cultures\Resources.hu.resx" />
+    <EmbeddedResource Include="ResourceManager\Cultures\Resources.it.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceManager\Cultures\Resources.nb.resx" />
+    <EmbeddedResource Include="ResourceManager\Cultures\Resources.nl.resx" />
+    <EmbeddedResource Include="ResourceManager\Cultures\Resources.pt.resx" />
+    <EmbeddedResource Include="ResourceManager\Cultures\Resources.resx">
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceManager\Cultures\Resources.ru.resx" />
+    <EmbeddedResource Include="ResourceManager\Cultures\Resources.zh.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Virtual.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Favorite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\network2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\English.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Folder.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Italy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\USA.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\USBPEN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\France.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

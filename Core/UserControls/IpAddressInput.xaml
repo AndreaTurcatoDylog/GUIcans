@@ -1,0 +1,48 @@
+﻿<controls:DisposableUserControlBase x:Class="Core.IpAddressInput"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:Core"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Loaded="IpAddressInput_Loaded">
+    
+    <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="15" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="15" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="15" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <controls:NumericTextBoxKeyboard x:Name="FirstValueNumericTextBox"  Grid.Column="0" 
+                 VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Padding="10"
+                 Text="{Binding NumericValue, Mode=TwoWay}" MinValue="0" MaxValue="255"/>
+
+        <TextBlock Grid.Column="1" Text="." HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+
+        <controls:NumericTextBoxKeyboard x:Name="SecondValueNumericTextBox"  Grid.Column="2" 
+                 VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Padding="10"
+                 Text="{Binding NumericValue, Mode=TwoWay}" MinValue="0" MaxValue="255"/>
+
+        <TextBlock Grid.Column="3" Text="." HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+
+        <controls:NumericTextBoxKeyboard x:Name="ThirdValueNumericTextBox"  Grid.Column="4" 
+                 VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Padding="10"
+                 Text="{Binding NumericValue, Mode=TwoWay}" MinValue="0" MaxValue="255"/>
+
+        <TextBlock Grid.Column="5" Text="." HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+
+        <controls:NumericTextBoxKeyboard x:Name="FourthValueNumericTextBox"  Grid.Column="6" 
+                 VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Padding="10"
+                 Text="{Binding NumericValue, Mode=TwoWay}" MinValue="0" MaxValue="255"/>
+
+    </Grid>
+</controls:DisposableUserControlBase>

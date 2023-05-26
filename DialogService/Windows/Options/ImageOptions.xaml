@@ -1,0 +1,177 @@
+﻿<core:DisposableUserControl x:Class="DialogService.ImageOptions"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:core="clr-namespace:Core;assembly=Core"
+            xmlns:local="clr-namespace:DialogService"
+            xmlns:system="clr-namespace:System;assembly=mscorlib"
+            mc:Ignorable="d" 
+            d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <!--Constants-->
+        <system:Double x:Key="ZeroDegree">0.0</system:Double>
+        <system:Double x:Key="90Degree">90.0</system:Double>
+
+        <!--NumberOfImagesInPageNormalTemplate  DataTemplate-->
+        <DataTemplate x:Key="NumberOfImagesInPageNormalTemplate">
+            <Border BorderThickness="1" BorderBrush="Black" Padding="15" Margin="5,0,0,0" VerticalAlignment="Stretch">
+                <StackPanel Orientation="Vertical">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Text="{Binding ElementName=LayoutRoot, Path=DataContext.Options.Settings.NumberOfImagesInOnePage}" 
+                                VerticalContentAlignment="Center" Width="50" Height="30"/>
+                        <Label Grid.Column="1" Content="{Binding Path=Label_Images_Title, Source={StaticResource Resources}}"  VerticalAlignment="Center" FontSize="22" FontWeight="DemiBold" Margin="10,0,0,0"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <!--NumberOfImagesInPageTouchTemplate  DataTemplate-->
+        <DataTemplate x:Key="NumberOfImagesInPageTouchTemplate">
+            <Border BorderThickness="1" BorderBrush="Black" Padding="15" Margin="5,0,0,0" VerticalAlignment="Stretch">
+                <StackPanel Orientation="Vertical">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <core:NumericTextBoxKeyboard 
+                            Text="{Binding ElementName=LayoutRoot, Path=DataContext.Options.Settings.NumberOfImagesInOnePage}"
+                            Width="50" MinValue="1" MaxValue="15"/>
+                        <Label Grid.Column="1" Content="{Binding Path=Label_Images_Title, Source={StaticResource Resources}}"  VerticalAlignment="Center" FontSize="22" FontWeight="DemiBold" Margin="10,0,0,0"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <!--Information Image (Cause and Action) Template Selector-->
+        <local:NumberOfImagesDataTemplateSelector x:Key="NumberOfImagesDataTemplateSelector"               
+            NumberOfImagesNormalTemplate="{StaticResource NumberOfImagesInPageNormalTemplate}"
+            NumberOfImagesTouchTemplate="{StaticResource NumberOfImagesInPageTouchTemplate}"/>
+    </UserControl.Resources>
+    
+    <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+       
+        <!--Filters-->
+        <StackPanel Grid.Column="0" Orientation="Vertical" Margin="10,20,0,0">
+            <Label Content="{Binding Path=Label_Title_Filters, Source={StaticResource Resources}}" />
+            <Border BorderThickness="1" BorderBrush="Black" Padding="15" Margin="5,0,0,0">
+                <StackPanel Orientation="Vertical">
+                    <!--JPG-->                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="JPG" FontSize="22" FontWeight="DemiBold"/>
+                        <ToggleButton Grid.Column="1" Style="{StaticResource SwitchTypeToggleButton}" 
+                            IsChecked="{Binding CheckedImageList[0], RelativeSource={RelativeSource 
+                                            AncestorType={x:Type local:ImageOptions}}}"                          
+                            Checked="OnImageFilterChecked" Unchecked="OnImageFilterUnchecked"
+                            Tag=".jpg"
+                            Width="67" Height="31">
+                        </ToggleButton>
+                    </Grid>
+
+                    <!--TIF-->
+                    <Grid Margin="0,20,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="TIF" FontSize="22"  FontWeight="DemiBold"/>
+                        <ToggleButton Grid.Column="1" Style="{StaticResource SwitchTypeToggleButton}" 
+                            IsChecked="{Binding CheckedImageList[1], RelativeSource={RelativeSource 
+                                        AncestorType={x:Type local:ImageOptions}}}"
+                            Checked="OnImageFilterChecked"
+                            Unchecked="OnImageFilterUnchecked"
+                            Tag=".tif"
+                            Width="67" Height="31" Margin="30,0,0,0"/>
+                    </Grid>
+
+                    <!--BMP-->
+                    <Grid Margin="0,20,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="BMP" FontSize="22" FontWeight="DemiBold"/>
+                        <ToggleButton Grid.Column="1" Style="{StaticResource SwitchTypeToggleButton}" 
+                            IsChecked="{Binding CheckedImageList[2], RelativeSource={RelativeSource 
+                                        AncestorType={x:Type local:ImageOptions}}}"
+                            Checked="OnImageFilterChecked" Unchecked="OnImageFilterUnchecked"
+                            Tag=".bmp"
+                            Width="67" Height="31"/>
+                    </Grid>
+
+                    <!--PNG-->
+                    <Grid Margin="0,20,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="PNG" FontSize="22"  FontWeight="DemiBold"/>
+                        <ToggleButton Grid.Column="1" Style="{StaticResource SwitchTypeToggleButton}" 
+                            IsChecked="{Binding CheckedImageList[3], RelativeSource={RelativeSource 
+                                        AncestorType={x:Type local:ImageOptions}}}"
+                            Checked="OnImageFilterChecked" Unchecked="OnImageFilterUnchecked"                            
+                            Tag=".png"
+                            Width="67" Height="31"/>
+                    </Grid>
+                    <!--16 BIT-->
+                    <Grid Margin="0,20,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="16 BIT" FontSize="22"  FontWeight="DemiBold"/>
+                        <ToggleButton Grid.Column="1" Style="{StaticResource SwitchTypeToggleButton}" 
+                            IsChecked="{Binding CheckedImageList[4], RelativeSource={RelativeSource 
+                                        AncestorType={x:Type local:ImageOptions}}}"
+                            Checked="OnImageFilterChecked" Unchecked="OnImageFilterUnchecked"                            
+                            Tag=".16"
+                            Width="67" Height="31"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+        <!--Rotation-->
+        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5,20,15,0" VerticalAlignment="Stretch">
+            <!--Rotation-->
+            <Label Content="{Binding Path=Label_Rotation, Source={StaticResource Resources}}" />
+            <Border BorderThickness="1" BorderBrush="Black" Padding="15" Margin="5,0,0,0" VerticalAlignment="Stretch">
+                <StackPanel Orientation="Vertical">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ToggleButton Grid.Column="0" Style="{StaticResource SwitchTypeToggleButton}" 
+                            IsChecked="{Binding PerformRotation, Mode=TwoWay, RelativeSource={RelativeSource 
+                                            AncestorType={x:Type local:ImageOptions}}}"                             
+                            Checked="OnRotationChecked" Unchecked="OnRotationUnchecked"                            
+                            Width="67" Height="31">
+                        </ToggleButton>
+                        <Label Grid.Column="1" Content="Rotate" VerticalAlignment="Center" FontSize="22" FontWeight="DemiBold" Margin="10,0,0,0"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!--Number of Images in one page-->
+            <Label Content="{Binding Path=Label_Title_Page, Source={StaticResource Resources}}" Margin="0,20,0,0" />
+            <ContentControl Content="{Binding Options.Settings.IsTouchApplication}"                    
+                    ContentTemplateSelector="{StaticResource NumberOfImagesDataTemplateSelector}"/>
+        </StackPanel>
+
+    </Grid>
+</core:DisposableUserControl>

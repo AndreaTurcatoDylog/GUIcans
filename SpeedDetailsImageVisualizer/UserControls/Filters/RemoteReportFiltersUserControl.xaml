@@ -1,0 +1,132 @@
+﻿<local:FiltersBaseUserControl x:Class="SpeedDetailsImageVisualizer.RemoteReportFiltersUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:core="clr-namespace:Core;assembly=Core"
+    xmlns:local="clr-namespace:SpeedDetailsImageVisualizer"
+    mc:Ignorable="d" 
+    d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <!--Converters-->
+        <core:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" True="Visible" False="Hidden"/>
+        <core:BooleanToVisibilityConverter x:Key="BooleanToVisibilityCollapsedConverter" True="Visible" False="Collapsed"/>
+        <core:BooleanToVisibilityConverter x:Key="NegativeBooleanToVisibilityCollapsedConverter" True="Collapsed" False="Visible"/>
+        <core:BooleanToVisibilityConverter x:Key="NegativeBooleanToVisibilityConverter" True="Collapsed" False="Visible"/>
+        <core:MultiBooleanToVisibilityConverter x:Key="MultiBooleanToVisibilityConverter" True="Visible" False="Hidden"/>
+        <core:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+        <core:MultiBooleanToVisibilityConverter x:Key="MultiBooleanToVisibilityCollapsedConverter" True="Visible" False="Collapsed" BooleanOperatorType="{x:Static core:BooleanOperatorType.AND}"/>
+    </UserControl.Resources>
+
+    <Grid Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Filters Informations-->
+        <DockPanel Grid.Column="0">
+            <Border x:Name="BorderCommands" Background="#accbe8"  BorderBrush="Black" BorderThickness="1"                    
+                    Height="Auto" VerticalAlignment="Bottom"  HorizontalAlignment="Stretch"  Margin="0,0,0,0">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Style="{StaticResource TextBlockEnabledColorStyle}"
+                            Text="{Binding Message_No_Filters_Applied, Source={StaticResource Resources}}"
+                            Visibility="{Binding Filters.FiltersExists, Converter={StaticResource NegativeBooleanToVisibilityConverter}}"
+                            FontSize="16"
+                            TextWrapping="WrapWithOverflow" MaxWidth="340" 
+                            HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+                            Margin="20,0,0,0"/>
+
+                    <Grid Grid.Column="0" Visibility="{Binding Filters.FiltersExists, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!--From Date Filter-->
+                        <StackPanel Grid.Column="0" Orientation="Vertical" Margin="0,5,0,5" VerticalAlignment="Top">
+                            <TextBlock Style="{StaticResource TextBlockEnabledColorStyle}"
+                                    Text="{Binding Label_From_Date, Source={StaticResource Resources}}" 
+                                    FontSize="17" Margin="5,0,0,5"/>
+                            <core:TextBoxWatermarks 
+                                    Text="{Binding Filters.FromDate, StringFormat=dd/MM/yyyy, UpdateSourceTrigger=PropertyChanged}"
+                                    WaterMarkText="{Binding Label_Any, Source={StaticResource Resources}}" 
+                                    VerticalAlignment="Top" HorizontalAlignment="Left"                                
+                                    Height="36" MinWidth="110" 
+                                    IsEnabled="False" FontSize="17" 
+                                    Margin="5,0,0,0" />
+                        </StackPanel>
+
+                        <!--To Date Filter-->
+                        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="0,5,0,5" VerticalAlignment="Top">
+                            <TextBlock Style="{StaticResource TextBlockEnabledColorStyle}"
+                                    Text="{Binding Label_To_Date, Source={StaticResource Resources}}" FontSize="17" 
+                                    Margin="3,0,0,5"/>
+                            <core:TextBoxWatermarks
+                                    Text="{Binding Filters.ToDate, StringFormat=dd/MM/yyyy, UpdateSourceTrigger=PropertyChanged}"
+                                    WaterMarkText="{Binding Label_Any, Source={StaticResource Resources}}" 
+                                    VerticalAlignment="Top" HorizontalAlignment="Left"                                
+                                    Height="36" MinWidth="110" 
+                                    IsEnabled="False" FontSize="17" 
+                                    Margin="5,0,0,0" />
+                        </StackPanel>
+
+                        <!--File Name-->
+                        <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0,5,0,5" VerticalAlignment="Top">
+                            <TextBlock Style="{StaticResource TextBlockEnabledColorStyle}"
+                                    Text="{Binding Label_FileName, Source={StaticResource Resources}}"  FontSize="17"  
+                                    Margin="3,0,0,5"/>
+                            <core:TextBoxWatermarks
+                                    Text="{Binding Filters.FileName, StringFormat=dd/MM/yyyy, UpdateSourceTrigger=PropertyChanged}"
+                                    WaterMarkText="{Binding Label_Any, Source={StaticResource Resources}}" 
+                                    VerticalAlignment="Top" HorizontalAlignment="Left"                                
+                                    Height="36" Width="130" 
+                                    IsEnabled="False" FontSize="17"  
+                                    Margin="5,0,0,0" />
+                        </StackPanel>
+                    </Grid>
+
+                    <!--Filter Icons-->
+                    <Grid Grid.Column="3"  VerticalAlignment="Top" 
+                                        Margin="10,11,5,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!--Open Filters Button-->
+                        <Button Grid.Column="0" Style="{StaticResource FilterButtonStyleWithHintStyle}" 
+                                    Visibility="{Binding AreFiltersEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                    Height="30" Width="30"
+                                    Command="{Binding OpenFiltersCommand}"                         
+                                    Margin="0,20,5,0"/>
+
+                        <!--Clear Filters Button-->
+                        <Grid Grid.Column="1">
+                            <Button Style="{StaticResource ICSButtonWithHintStyle}" 
+                                            Height="27" Width="27"
+                                            Command="{Binding ClearFiltersCommand}"                       
+                                            Margin="5,20,5,0">
+                                <Button.Visibility>
+                                    <MultiBinding Converter="{StaticResource MultiBooleanToVisibilityConverter}">
+                                        <Binding Path="Filters.FiltersExists" Mode="OneWay"/>
+                                    </MultiBinding>
+                                </Button.Visibility>
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Border>
+        </DockPanel>
+    </Grid>
+</local:FiltersBaseUserControl>

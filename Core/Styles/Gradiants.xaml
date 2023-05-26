@@ -1,0 +1,426 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Core"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+
+   
+    <LinearGradientBrush x:Key="ButtonBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="Silver" Offset="0.1"/>
+        <GradientStop Color="Gray" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="BackGroundSteelBlue" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="LightSteelBlue" Offset="0" />
+        <GradientStop Color="SteelBlue" Offset="1.0" />
+    </LinearGradientBrush>
+
+
+    <LinearGradientBrush x:Key="GeneralBackgroundBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="Blue" Offset="0"/>
+        <GradientStop Color="SteelBlue" Offset="0.3"/>
+        <GradientStop Color="LightCoral" Offset="0.6"/>
+        <GradientStop Color="Red" Offset="1"/>
+    </LinearGradientBrush>
+
+
+    <LinearGradientBrush x:Key="BackgroundBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="Blue" Offset="0"/>
+        <GradientStop Color="Blue" Offset="0.3"/>
+        <GradientStop Color="SteelBlue" Offset="0.6"/>
+        <GradientStop Color="SteelBlue" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="BackgroundBrush_2" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="SteelBlue" Offset="0"/>
+        <GradientStop Color="SteelBlue" Offset="0.5"/>
+        <GradientStop Color="Blue" Offset="1"/>
+    </LinearGradientBrush>
+   
+
+
+    <RadialGradientBrush x:Key="GradiantDarkOliveGreenSilver" Center="0.1,0.0" GradientOrigin="0.1,0">
+        <GradientStop Color="White" Offset="0" />
+        <GradientStop Color="DarkOliveGreen" Offset="1.0" />
+    </RadialGradientBrush>
+    
+    <RadialGradientBrush x:Key="GradiantBlue" Center="0.1,0.0" GradientOrigin="0.1,0">
+        <GradientStop Color="LightBlue" Offset="0" />
+        <GradientStop Color="#FF000077" Offset="1.0" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush x:Key="GradiantDarkBlue" Center="0.1,0.0" GradientOrigin="0.1,0">
+        <GradientStop Color="LightBlue" Offset="0.01" />
+        <GradientStop Color="DarkBlue" Offset="1.0" />
+    </RadialGradientBrush>
+    
+    <RadialGradientBrush x:Key="GradiantOrange" Center="0.1,0.0" GradientOrigin="0.1,0">
+        <GradientStop Color="LightYellow" Offset="0" />
+        <GradientStop Color="Orange" Offset="1.0" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush x:Key="GradiantFlatOrange" Center="0.1,0.0" GradientOrigin="0.1,0">
+        <GradientStop Color="LightYellow" Offset="0" />
+        <GradientStop Color="Orange" Offset="1.0" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush x:Key="GradiantAquamarine" Center="0.3,0.3" GradientOrigin="0.3,0.3">
+        <GradientStop Color="AliceBlue" Offset="0" />
+        <GradientStop Color="Aquamarine" Offset="1.0" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush x:Key="GradiantRed" Center="0.3,0.3" GradientOrigin="0.3,0.3">
+        <GradientStop Color="LightPink" Offset="0" />
+        <GradientStop Color="Red" Offset="1.0" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush x:Key="GradiantDarkRed" Center="0.3,0.3" GradientOrigin="0.3,0.3">
+        <GradientStop Color="PaleVioletRed" Offset="0.01" />
+        <GradientStop Color="DarkRed" Offset="1.0" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush x:Key="GradiantFlatRed" Center="0.3,0.3" GradientOrigin="0.3,0.3">
+        <GradientStop Color="#FFFF7777" Offset="0" />
+        <GradientStop Color="Red" Offset="0.8" />
+    </RadialGradientBrush>
+
+    <LinearGradientBrush x:Key="LinearGradiantLightSteel" StartPoint="0,0.4" EndPoint="1,0.6">
+        <GradientStop Color="#FF9BBBD5" Offset="0" />
+        <GradientStop Color="#FF4683B4" Offset="0.8" />
+    </LinearGradientBrush>
+
+    <RadialGradientBrush x:Key="GradiantLightSteel" Center="0.3,0.3" GradientOrigin="0.3,0.3">
+        <GradientStop Color="#FF9BBBD5" Offset="0" />
+        <GradientStop Color="#FF4683B4" Offset="0.8" />
+    </RadialGradientBrush>
+
+    <LinearGradientBrush x:Key="LinearGradiantGreen"  StartPoint="0,0.4" EndPoint="1,0.6">
+        <GradientStop Color="LightSeaGreen" Offset="0" />
+        <GradientStop Color="Green" Offset="0.8" />
+    </LinearGradientBrush>
+
+    <RadialGradientBrush x:Key="GradiantGreen" Center="0.3,0.3" GradientOrigin="0.3,0.3">
+        <GradientStop Color="LightSeaGreen" Offset="0" />
+        <GradientStop Color="Green" Offset="1.0" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush x:Key="GradiantDarkSlateGray" Center="0.1,0.0" GradientOrigin="0.1,0">
+        <GradientStop Color="LightSlateGray" Offset="0" />
+        <GradientStop Color="DarkSlateGray" Offset="1.0" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush x:Key="GradiantDarkOrange" Center="0.1,0.0" GradientOrigin="0.1,0">
+        <GradientStop Color="LightYellow" Offset="0" />
+        <GradientStop Color="DarkOrange" Offset="1.0" />
+    </RadialGradientBrush>
+
+    <!--<RadialGradientBrush x:Key="FlatDarkOrange" Center="0.1,0.0" GradientOrigin="0.1,0">
+        <GradientStop Color="Orange" Offset="0" />
+        <GradientStop Color="DarkOrange" Offset="1.0" />
+    </RadialGradientBrush>-->
+
+    <SolidColorBrush x:Key="FlatDarkOrange" Color="#dddd01"/>
+    <SolidColorBrush x:Key="FlatDarkRed" Color="#8C0000"/>
+    <SolidColorBrush x:Key="FlatDarkGreen" Color="#00C814"/>
+    <SolidColorBrush x:Key="FlatDarkBlue" Color="#00008C"/>
+    
+
+    <!--<RadialGradientBrush x:Key="FlatDarkBlue" Center="0.1,0.0" GradientOrigin="0.1,0">
+        <GradientStop Color="Blue" Offset="0" />
+        <GradientStop Color="DarkBlue" Offset="1.0" />
+    </RadialGradientBrush>-->
+
+    <!--<RadialGradientBrush x:Key="FlatDarkGreen" Center="0.1,0.0" GradientOrigin="0.1,0">
+        <GradientStop Color="Green" Offset="0" />
+        <GradientStop Color="DarkGreen" Offset="1.0" />
+    </RadialGradientBrush>-->
+
+    <!--<RadialGradientBrush x:Key="FlatDarkRed" Center="0.1,0.0" GradientOrigin="0.1,0">
+        <GradientStop Color="IndianRed" Offset="0" />
+        <GradientStop Color="Red" Offset="1.0" />
+    </RadialGradientBrush>-->
+
+    <RadialGradientBrush x:Key="GradiantSteelBlue" Center="0.1,0.0" GradientOrigin="0.1,0">
+        <GradientStop Color="LightSteelBlue" Offset="0" />
+        <GradientStop Color="SteelBlue" Offset="1.0" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush x:Key="GradiantBlack" Center="0.1,0.0" GradientOrigin="0.1,0">
+        <GradientStop Color="DarkGray" Offset="0" />
+        <GradientStop Color="#101010" Offset="1.0" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush x:Key="GradiantDarkGreen" Center="0.1,0.0" GradientOrigin="0.1,0">
+        <GradientStop Color="LightSeaGreen" Offset="0" />
+        <GradientStop Color="DarkGreen" Offset="1.0" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush x:Key="GradiantDarkSilver" Center="0.1,0.0" GradientOrigin="0.1,0">
+        <GradientStop Color="Silver" Offset="0" />
+        <GradientStop Color="Gray" Offset="1.0" />
+    </RadialGradientBrush>
+
+    <LinearGradientBrush x:Key="LinearGradiantSilver" StartPoint="0,0.4" EndPoint="1,0.6">
+        <GradientStop Color="Silver" Offset="0" />
+        <GradientStop Color="WhiteSmoke" Offset="0.8" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="LinearGradiantBlanchedAlmond" StartPoint="0,0.4" EndPoint="1,0.6">
+        <GradientStop Color="LightYellow" Offset="0" />
+        <GradientStop Color="BlanchedAlmond" Offset="0.8" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="LinearIndianRed"  StartPoint="0,0.4" EndPoint="1,0.6">
+        <GradientStop Color="LightPink" Offset="0" />
+        <GradientStop Color="IndianRed" Offset="0.8" />
+    </LinearGradientBrush>
+
+    <RadialGradientBrush x:Key="GradiantTeal" Center="0.3,0.3" GradientOrigin="0.3,0.3">
+        <GradientStop Color="LightGray" Offset="0" />
+        <GradientStop Color="Teal" Offset="0.9" />
+    </RadialGradientBrush>
+
+
+    <!--SolidColorBrush x:Key="SteelBlueColor" Color="{StaticResource SteelBlueColor_1}" Opacity="0.4"/>-->
+
+    <!--Colors-->
+    <Color x:Key="SugarPaperColor">#7997bf</Color>
+    <Color x:Key="SteelBlueColor_1">SteelBlue</Color>
+    <Color x:Key="BlackColor">Black</Color>
+    <Color x:Key="GreenColor">Green</Color>
+    <Color x:Key="RedColor">Red</Color>
+    <Color x:Key="GrayColor">Gray</Color>
+    <Color x:Key="WhiteSmokeColor">WhiteSmoke</Color>
+    <Color x:Key="BlanchedAlmondColor">BlanchedAlmond</Color>
+    <Color x:Key="PlumColor">Plum</Color>
+    <Color x:Key="TealColor">Teal</Color>
+    <Color x:Key="OrangeColor">Orange</Color>
+    <Color x:Key="BlueColor">#00508C</Color>
+    <Color x:Key="IntenseYellowColor">#fffea1</Color>
+    <Color x:Key="WhiteColor">White</Color>
+    <Color x:Key="SkyBlueColor">#1ae8c2</Color>
+    <Color x:Key="SilverColor">#f2f2f2</Color>
+    <Color x:Key="ViolerColor">#863292</Color>
+    <Color x:Key="AntiqueWhiteColor">AntiqueWhite</Color>
+
+    <!--Dark Colors-->
+    <Color x:Key="DarkSugarPaperColor">#708db5</Color>
+    <Color x:Key="DarkRedColor">DarkRed</Color>
+    <Color x:Key="DarkGreenColor">#208040</Color>
+    <Color x:Key="DarkBlueColor">#004080</Color>
+    <Color x:Key="DarkOrangeColor">#f8a74b</Color>
+    <Color x:Key="DarkSlateGrayColor">DarkSlateGray</Color>
+    <Color x:Key="DarkGrayColor">#9b9b9b</Color>
+
+    <!--Light Colors-->
+    <Color x:Key="LightSugarPaperColor">#accbe8</Color>
+    <Color x:Key="LightSteelBlueColor">#FF9BBBD5</Color>
+    <Color x:Key="LightSlateGrayColor">LightSlateGray</Color>
+    <Color x:Key="LightSteelColor">#FF4683B4</Color>
+    <Color x:Key="LightGreenColor">#00cc66</Color>
+    <Color x:Key="LightYellowColor">#d9db54</Color>
+    <Color x:Key="LightRedColor">#ff5c5c</Color>
+
+     <SolidColorBrush x:Key="SteelBlueColor" Color="{StaticResource SteelBlueColor_1}" Opacity="0.4"/>
+
+
+        <!--New Brushed-->
+    <SolidColorBrush x:Key="MainBackGround"  Color="{StaticResource SugarPaperColor}"/>
+
+    <!--Container-->
+    <SolidColorBrush x:Key="ContainerOpenedBackground"  Color="{StaticResource DarkBlueColor}"/>
+    <SolidColorBrush x:Key="ContainerClosedBackground"  Color="{StaticResource SugarPaperColor}"/>
+    <SolidColorBrush x:Key="ContainerOpenedForeground"  Color="{StaticResource WhiteColor}"/>
+    <SolidColorBrush x:Key="ContainerClosedForeground"  Color="{StaticResource WhiteColor}"/>
+
+    <!--Information-->
+    <SolidColorBrush x:Key="NormalBrush" Color="{StaticResource DarkBlueColor}"/>
+    <SolidColorBrush x:Key="WarningBrush" Color="{StaticResource DarkOrangeColor}"/>
+    <SolidColorBrush x:Key="ErrorBrush" Color="{StaticResource LightRedColor}"/>
+    <SolidColorBrush x:Key="DangerBrush" Color="{StaticResource LightRedColor}"/>
+    <SolidColorBrush x:Key="ChangedBrush" Color="{StaticResource DarkOrangeColor}"/>
+
+    <!--Toggle Button-->
+    <SolidColorBrush x:Key="ToggleButtonFalseInternalCircleBackground" Color="{StaticResource WhiteColor}"/>
+    <SolidColorBrush x:Key="ToggleButtonTrueInternalCircleBackground" Color="{StaticResource WhiteColor}"/>
+
+    <!--Checked\Unchecked-->
+    <SolidColorBrush x:Key="CheckedBrush" Color="{StaticResource DarkGreenColor}"/>
+    <SolidColorBrush x:Key="UncheckedBrush" Color="{StaticResource GrayColor}"/>
+    <SolidColorBrush x:Key="HighlightedBrush" Color="{StaticResource IntenseYellowColor}"/>
+
+    <!--Border-->
+    <SolidColorBrush x:Key="BorderMarginBrush" Color="{StaticResource BlackColor}"/>
+
+    <!--Generics-->
+    <SolidColorBrush x:Key="InformationDisableForeground" Color="{StaticResource SilverColor}"/>
+    <SolidColorBrush x:Key="InformationLightForeground" Color="{StaticResource WhiteColor}"/>
+    <SolidColorBrush x:Key="DisabledBrush" Color="{StaticResource DarkGrayColor}"/>
+    <SolidColorBrush x:Key="WritingModeBackgroundBrush" Color="{StaticResource IntenseYellowColor}"/>
+    <SolidColorBrush x:Key="NormalInformationBrush" Color="{StaticResource BlackColor}"/>
+    <SolidColorBrush x:Key="GenericInformationBrush" Color="{StaticResource DarkBlueColor}"/>
+    <SolidColorBrush x:Key="GoodInformationBrush" Color="{StaticResource DarkGreenColor}"/>
+    <SolidColorBrush x:Key="WarningInformationBrush" Color="{StaticResource DarkOrangeColor}"/>
+    <SolidColorBrush x:Key="ErrorInformationBrush" Color="{StaticResource DarkRedColor}"/>
+    <SolidColorBrush x:Key="AlertInformationBrush" Color="{StaticResource LightRedColor}"/>
+    <SolidColorBrush x:Key="UpdateBackgroundBrush" Color="{StaticResource DarkOrangeColor}"/>
+    <SolidColorBrush x:Key="InformationBackgroundLightBrush" Color="{StaticResource WhiteColor}"/>
+    <SolidColorBrush x:Key="GenericInformationBackgroundBrush" Color="{StaticResource DarkBlueColor}"/>
+    <SolidColorBrush x:Key="WrongAcquisitionBackgroundBrush" Color="{StaticResource ViolerColor}"/>
+    <SolidColorBrush x:Key="InformationPanelBackgroundBrush" Color="{StaticResource SugarPaperColor}"/>
+    <SolidColorBrush x:Key="InformationPanelBackgroundBrush_2" Color="{StaticResource SilverColor}"/>
+    <SolidColorBrush x:Key="InformationMarginLightBrush" Color="{StaticResource WhiteColor}"/>
+    <SolidColorBrush x:Key="InformationMarginMidLightBrush" Color="{StaticResource SilverColor}"/>
+    <SolidColorBrush x:Key="InformationMarginDarkBrush" Color="{StaticResource GrayColor}"/>
+    <SolidColorBrush x:Key="UpdatedMarginBrush" Color="{StaticResource BlackColor}"/>
+
+    <SolidColorBrush x:Key="NormalBackgroundBrush" Color="{StaticResource AntiqueWhiteColor}"/>
+
+
+    <!--MessageBox-->
+    <SolidColorBrush x:Key="MessageBoxBackgroundBrush" Color="{StaticResource WhiteColor}"/>
+    <SolidColorBrush x:Key="MessageBoxTitleForegroundBrush" Color="{StaticResource WhiteColor}"/>
+    <SolidColorBrush x:Key="MessageBoxBorderBrush" Color="{StaticResource BlackColor}"/>
+
+    <!--PaginationButton-->
+    <SolidColorBrush x:Key="PaginationButtonCheckedBackgroundBrush" Color="{StaticResource IntenseYellowColor}"/>
+    <SolidColorBrush x:Key="PaginationButtonNotCheckedBackgroundBrush" Color="{StaticResource WhiteSmokeColor}"/>
+
+    <!--PaginationSettings-->
+    <SolidColorBrush x:Key="PagionationSettingsBackgroundBrush" Color="{StaticResource SugarPaperColor}"/>
+
+    <!--PaginationSettingContainerButton-->
+    <SolidColorBrush x:Key="PagionationContainerOpenedBackgroundBrush" Color="{StaticResource DarkBlueColor}"/>
+    <SolidColorBrush x:Key="PagionationContainerOpenedForegroundBrush" Color="{StaticResource WhiteColor}"/>
+    <SolidColorBrush x:Key="PagionationContainerClosedBackgroundBrush" Color="{StaticResource SugarPaperColor}"/>
+    <SolidColorBrush x:Key="PagionationContainerClosedForegroundBrush" Color="{StaticResource WhiteColor}"/>
+    <SolidColorBrush x:Key="PagionationContainerRectangleRejectBrush" Color="{StaticResource DarkOrangeColor}"/>
+
+    <!--Circle Checkbox-->
+    <SolidColorBrush x:Key="CheckboxCheckedBorderBackgroundBrush" Color="{StaticResource SilverColor}"/>
+    <SolidColorBrush x:Key="CheckboxCheckedBorderBrush" Color="{StaticResource GrayColor}"/>
+
+    <!--Image Button-->
+    <SolidColorBrush x:Key="ButtonLightForegroundBrush" Color="{StaticResource WhiteColor}"/>
+    <SolidColorBrush x:Key="ButtonDarkForegroundBrush" Color="{StaticResource BlackColor}"/>
+    <SolidColorBrush x:Key="ButtonAbortBackgroundBrush" Color="{StaticResource BlueColor}"/>
+    <SolidColorBrush x:Key="ButtonAlertAbortBackgroundBrush" Color="{StaticResource LightRedColor}"/>
+    <SolidColorBrush x:Key="ButtonCommandBackgroundBrush" Color="{StaticResource LightYellowColor}"/>
+    <SolidColorBrush x:Key="ButtonExitBackgroundBrush" Color="{StaticResource BlueColor}"/>
+    <SolidColorBrush x:Key="ButtonSimpleActionBackgroundBrush" Color="{StaticResource SkyBlueColor}"/>
+    <SolidColorBrush x:Key="ButtonServiceBackgroundBrush" Color="{StaticResource BlackColor}"/>
+    <SolidColorBrush x:Key="ButtonServiceForegroundBrush" Color="{StaticResource WhiteColor}"/>
+    <SolidColorBrush x:Key="ButtonServicePressedBackgroundBrush" Color="{StaticResource LightYellowColor}"/>
+    <SolidColorBrush x:Key="ButtonServicePressedForegroundBrush" Color="{StaticResource BlackColor}"/>
+
+    <!--Toggle Button-->
+    <SolidColorBrush x:Key="ToggleButtonPlaceholderCheckedBackgroundBrush" Color="{StaticResource WhiteColor}"/>
+    <SolidColorBrush x:Key="ToggleButtonPlaceholderUncheckedBackgroundBrush" Color="{StaticResource WhiteColor}"/>
+    <SolidColorBrush x:Key="ToggleButtonFalseBackground" Color="{StaticResource GrayColor}"/>
+    <SolidColorBrush x:Key="ToggleButtonTrueBackground" Color="{StaticResource DarkGreenColor}"/>
+
+    <!--Keyboards-->
+    <SolidColorBrush x:Key="KeyboarsBackgroundBrush" Color="{StaticResource BlackColor}"/>
+    <SolidColorBrush x:Key="KeyboarsMarginBrush" Color="{StaticResource WhiteColor}"/>
+    <SolidColorBrush x:Key="KeyboarsKeyForegroundBrush" Color="{StaticResource WhiteColor}"/>
+    <SolidColorBrush x:Key="KeyboarsKeyPressedForegroundBrush" Color="{StaticResource BlackColor}"/>
+    <SolidColorBrush x:Key="KeyboarsSpecialKeyBackgroundBrush" Color="{StaticResource BlackColor}"/>
+
+    <!--Generator-->
+    <SolidColorBrush x:Key="GeneratorONBackgroundBrush" Color="{StaticResource IntenseYellowColor}"/>
+    <SolidColorBrush x:Key="GeneratorOFFBackgroundBrush" Color="{StaticResource GrayColor}"/>
+
+    <SolidColorBrush x:Key="BorderLightSugarPaperBackgroundBrush" Color="{StaticResource LightSugarPaperColor}"/>
+
+    <!--TextKeyboardBox-->
+    <SolidColorBrush x:Key="ErrorForegroundBrush" Color="{StaticResource WhiteColor}"/>
+
+    <!--Borders-->
+    <SolidColorBrush x:Key="BorderNormalBackgroundBrush" Color="{StaticResource BlackColor}"/>
+
+
+
+    <!--Main-->
+    <sys:Double x:Key="MainPageInformationPanelHeight">74</sys:Double>
+    <sys:Double x:Key="MainPageInformationLogoWidth">240</sys:Double>
+    <sys:Double x:Key="MainPageTitleFontSize">40</sys:Double>
+    <sys:Double x:Key="MainPageTitleSystemFontSize">20</sys:Double>
+    <sys:Double x:Key="MainPageTitleDateFontSize">20</sys:Double>
+    <sys:Double x:Key="MainPageTitleTimeFontSize">40</sys:Double>
+    <sys:Double x:Key="MainPageGeneratorIconWidth">70</sys:Double>
+
+    <!--Font Size Dimensions -->
+    <sys:Double x:Key="LittleFontSize">21</sys:Double>
+    <sys:Double x:Key="MediumFontSize">26</sys:Double>
+    <sys:Double x:Key="LargeFontSize">31</sys:Double>
+
+    <!--Scrool Bar Width and Height-->
+    <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">45</sys:Double>
+    <sys:Double x:Key="{x:Static SystemParameters.HorizontalScrollBarHeightKey}">45</sys:Double>
+
+    <!--Buttons Dimensions-->
+    <sys:Double x:Key="MenuButtonWidth">250</sys:Double>
+    <sys:Double x:Key="MenuButtonHeight">250</sys:Double>
+    <sys:Double x:Key="MenuButtonFontSize">25</sys:Double>
+    <sys:String x:Key="MenuButtonContentMargin">0,135,0,0</sys:String>
+
+    <!--Medium Buttons Dimensions-->
+    <sys:Double x:Key="MediumButtonWidth">200</sys:Double>
+    <sys:Double x:Key="MediumButtonHeight">200</sys:Double>
+    <sys:Double x:Key="MediumButtonFontSize">20</sys:Double>
+    <sys:String x:Key="MediumButtonContentMargin">0,90,0,0</sys:String>
+
+    <!--Custom Buttons Dimensions-->
+    <sys:Double x:Key="CustomButtonWidth">125</sys:Double>
+    <sys:Double x:Key="CustomButtonHeight">125</sys:Double>
+    <sys:Double x:Key="CustomButtonFontSize">15</sys:Double>
+    <sys:String x:Key="CustomButtonContentMargin">0,75,0,0</sys:String>
+
+    <!--Icon Buttons Dimensions-->
+    <sys:Double x:Key="IconButtonSize">30</sys:Double>
+
+    <!--Normal Keybord Button Dimensions-->
+    <sys:Double x:Key="NormalKeybordButtonWidth">80</sys:Double>
+    <sys:Double x:Key="NormalKeybordButtonHeight">80</sys:Double>
+    <sys:Double x:Key="NormalKeybordButtonFontSize">35</sys:Double>
+
+    <sys:Double x:Key="SpaceKeybordButtonWidth">250</sys:Double>
+    <sys:Double x:Key="BackspaceKeybordButtonWidth">123</sys:Double>
+    <sys:Double x:Key="CapsKeybordButtonWidth">125</sys:Double>
+
+    <sys:Double x:Key="EnterKeybordButtonWidth">123</sys:Double>
+    <sys:Double x:Key="SpecialKeybordButtonWidth">125</sys:Double>
+    <sys:Double x:Key="DoubleSizeKeybordButtonWidth">165</sys:Double>
+
+    <!--Pagination Files Dimensions -->
+    <sys:Double x:Key="PaginationFilesButtonWidth">600</sys:Double>
+    <sys:Double x:Key="PaginationFilesButtonHeight">800</sys:Double>
+    <sys:Int32 x:Key="PaginationFilesNumberOfElements">16</sys:Int32>
+    <sys:Double x:Key="PaginationFilesSearchingPanelWidth">500</sys:Double>
+    <sys:Double x:Key="PaginationFilesSearchingPanelHeight">445</sys:Double>
+
+    <!-- Min Widths  -->
+    <sys:Double x:Key="MinWidth_1">500</sys:Double>
+
+    <!--Pagination Buttons-->
+    <sys:Double x:Key="PaginationButtonWidth">100</sys:Double>
+
+    <!--TextBoxKeyboard-->
+    <sys:Double x:Key="TextBoxFontSize">26</sys:Double>
+
+    <!--Title Texblock-->
+    <sys:Double x:Key="TitleLittleFontSize">21</sys:Double>
+    <sys:Double x:Key="TitleMediumFontSize">26</sys:Double>
+    <sys:Double x:Key="TitleLargeFontSize">31</sys:Double>
+
+    <!--Product Information Panel-->
+    <sys:Double x:Key="ProductPanelInformationWidth">500</sys:Double>
+    <sys:Double x:Key="ProductImageWidth">160</sys:Double>
+    <sys:Double x:Key="ProductImageHeight">200</sys:Double>
+    <sys:Double x:Key="ProductLabelMinHeight">45</sys:Double>
+    <sys:Double x:Key="ProductLittleImageWidth">80</sys:Double>
+    <sys:Double x:Key="ProductLittleImageHeight">80</sys:Double>
+    <sys:Double x:Key="ProductPathImageWidth">500</sys:Double>
+
+
+</ResourceDictionary>

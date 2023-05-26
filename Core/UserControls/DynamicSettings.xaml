@@ -1,0 +1,417 @@
+﻿<controls:DisposableUserControl x:Class="Core.DynamicSettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Core"
+             xmlns:controls="clr-namespace:Core"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <local:BoolToBitConverter x:Key="BoolToBitConverter" />
+        <local:BoolToOnOffConverter x:Key="BoolToOnOffConverter" />
+        <local:LabelToLanguageTextConverter x:Key="LabelToLanguageTextConverter" /> 
+
+        <!--Boolean Type-->
+        <DataTemplate x:Key="BooleanDataTemplate">
+            <Border  Style="{StaticResource UpdateBackgroundBorder}"
+                     MouseLeftButtonDown="OnMouseLeftButtonDown">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="25"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" 
+                                   Text="{Binding Label, Converter={StaticResource LabelToLanguageTextConverter}}"
+                                   Width="Auto" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Left"
+                                   FontSize="15"
+                                   Padding="10"
+                                   MouseLeftButtonDown="OnMouseLeftButtonDown"/>
+
+                    <!--Click="OnBooleanValueChanged"-->
+                    <local:ToggleButtonActive Grid.Column="2" Width="70" VerticalAlignment="Center"  HorizontalAlignment="Right" Height="30"
+                                    Margin="10"
+                                    IsChecked ="{Binding Value, Mode=TwoWay}"
+                                    Style="{StaticResource SwitchTypeToggleButton}" Visibility="Hidden" 
+                                    Checked="OnBooleanValueChanged"
+                                    />
+
+                    <TextBlock Grid.Column="2" Margin="0,0,5,0"
+                        Text="{Binding Value, Mode=TwoWay}" Width="Auto" Height="38" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Right"
+                                   FontSize="15"
+                                   Padding="5" MouseLeftButtonDown="OnMouseLeftButtonDown" Visibility="Visible"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!--Bit Type-->
+        <DataTemplate x:Key="BitDataTemplate">
+            <Border  Style="{StaticResource UpdateBackgroundBorder}"
+                     MouseLeftButtonDown="OnMouseLeftButtonDown">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                                   Text="{Binding Label, Converter={StaticResource LabelToLanguageTextConverter}}"
+                                   Width="Auto" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Left"
+                                   FontSize="15"
+                                   Padding="10"
+                                   MouseLeftButtonDown="OnMouseLeftButtonDown"/>
+
+                    <ToggleButton Grid.Column="2" Width="70" VerticalAlignment="Center"  HorizontalAlignment="Right" Height="30"
+                                    Margin="10"
+                                    IsChecked ="{Binding Value, Mode=TwoWay, NotifyOnSourceUpdated=True}"
+                                    Style="{StaticResource SwitchTypeToggleButton}" Visibility="Hidden"
+                                    Click="OnBooleanValueChanged"/>
+
+                    <TextBlock Grid.Column="2" Margin="0,0,5,0"
+                        Text="{Binding Value, Mode=TwoWay, Converter={StaticResource BoolToBitConverter}}" 
+                        Width="Auto" Height="38" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Right"
+                        FontSize="15"
+                        Padding="5" MouseLeftButtonDown="OnMouseLeftButtonDown" Visibility="Visible"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!--Numeric Type-->
+        <DataTemplate x:Key="NumericDataTemplate">
+            <Border  Style="{StaticResource UpdateBackgroundBorder}"
+                     MouseLeftButtonDown="OnMouseLeftButtonDown">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="4*"/> 
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                                   Text="{Binding Label, Converter={StaticResource LabelToLanguageTextConverter}}"
+                                   Width="Auto" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Left"
+                                   FontSize="15"
+                                   Padding="10"
+                                   MouseLeftButtonDown="OnMouseLeftButtonDown"/>
+
+                    <local:NumericSliderUpDown Grid.Column="2" Margin="0,0,0,0"
+                                   VerticalAlignment="Center"  HorizontalAlignment="Stretch" Height="60"  Width="Auto" 
+                                   IsSliderVisible="True"
+                                   FontSize="15"
+                                   Padding="10"
+                                   NumericValue="{Binding Value, Mode=TwoWay, NotifyOnSourceUpdated=True}"
+                                   MinValue="{Binding Path=Options.(local:ISettingNumericOption.MinValue)}"
+                                   MaxValue="{Binding Path=Options.(local:ISettingNumericOption.MaxValue)}"
+                                   Visibility="Hidden"   
+                                   SourceUpdated="OnSourceUpdated"/>
+
+                    <TextBlock Grid.Column="2" Margin="0,0,5,0"
+                        Text="{Binding Value, Mode=TwoWay, StringFormat='#0.00'}" Width="Auto" Height="38" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Right"
+                                   FontSize="15"
+                                   Padding="5" MouseLeftButtonDown="OnMouseLeftButtonDown" Visibility="Visible"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!--Text Type-->
+        <DataTemplate x:Key="TextDataTemplate">
+            <Border  Style="{StaticResource UpdateBackgroundBorder}"
+                     MouseLeftButtonDown="OnMouseLeftButtonDown">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                                   Text="{Binding Label, Converter={StaticResource LabelToLanguageTextConverter}}"
+                                   Width="Auto" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Left"
+                                   FontSize="15"
+                                   Padding="10" 
+                                   MouseLeftButtonDown="OnMouseLeftButtonDown"/>
+
+                    <local:TextBoxKeyboard Grid.Column="2" Margin="0,0,5,0"
+                            Text="{Binding Value, Mode=TwoWay, NotifyOnSourceUpdated=True}"
+                             Width="Auto" Height="38" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Stretch"
+                             VerticalContentAlignment="Center" HorizontalContentAlignment="Right"
+                             FontSize="15"
+                             Padding="8" 
+                             Visibility="Hidden"
+                             MouseLeftButtonDown="OnMouseLeftButtonDown" 
+                             SourceUpdated="OnSourceUpdated"
+                             />
+
+                    <TextBlock Grid.Column="2" Margin="0,0,5,0"
+                        Text="{Binding Value, Mode=TwoWay}" Width="Auto" Height="38" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Right"
+                                   FontSize="15"
+                                   Padding="10" MouseLeftButtonDown="OnMouseLeftButtonDown" Visibility="Visible"/>
+                </Grid>
+            </Border>
+            
+        </DataTemplate>
+
+        <!--Radio Type-->
+        <DataTemplate x:Key="RadioDataTemplate">
+            <Border x:Name="SettingBorder" 
+                    Style="{StaticResource NoUpdatedBackgroundBorder}"
+                     MouseLeftButtonDown="OnSingleChoiceMouseLeftButtonDown">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                                   Text="{Binding Label, Converter={StaticResource LabelToLanguageTextConverter}}"
+                                   Width="Auto" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Left"
+                                   FontSize="15"
+                                   Padding="10"
+                                  />
+
+                    <RadioButton  x:Name="SettingRadioButton"
+                                  GroupName="Settings" 
+                                  Grid.Column="2" Width="40" Height="40"
+                                  VerticalAlignment="Center"  HorizontalAlignment="Right"
+                                  Margin="0,0,10,0" 
+                                  IsChecked="{Binding Checked, Mode=TwoWay}"
+                                  Visibility="Hidden"
+                                  IsEnabled="{Binding Enabled, Mode=OneWay}"
+                                  Unchecked="OnBooleanValueChanged"
+                                  />
+
+                    <TextBlock Grid.Column="2" Margin="0,0,5,0"
+                        Width="Auto" Height="38" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Right"
+                        FontSize="15"
+                        Padding="5" MouseLeftButtonDown="OnSingleChoiceMouseLeftButtonDown" Visibility="Visible"/>
+                </Grid>
+            </Border>
+            
+            <DataTemplate.Triggers>
+                <Trigger SourceName="SettingRadioButton" Property ="IsChecked" Value ="True">
+                    <Setter TargetName="SettingBorder" Property="BorderBrush" Value="White"/>
+                    <Setter TargetName="SettingBorder" Property="BorderThickness" Value="2"/>
+                    <Setter TargetName="SettingBorder" Property="Background" Value="{StaticResource GradiantDarkGreen}"/>
+                </Trigger>
+                <Trigger SourceName="SettingRadioButton" Property ="IsEnabled" Value ="False">
+                    <Setter TargetName="SettingBorder" Property="BorderBrush" Value="White"/>
+                    <Setter TargetName="SettingBorder" Property="BorderThickness" Value="2"/>
+                    <Setter TargetName="SettingBorder" Property="Background" Value="{StaticResource GradiantDarkSilver}"/>
+                </Trigger>
+            </DataTemplate.Triggers>
+            
+        </DataTemplate>
+
+        <!--Link with value Type-->
+        <DataTemplate x:Key="LinkWithValueDataTemplate">
+            <Border  Style="{StaticResource UpdateBackgroundBorder}"
+                     MouseLeftButtonDown="OnLinkMouseLeftButtonDown" Tag="{Binding Next}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                                   Text="{Binding Label, Converter={StaticResource LabelToLanguageTextConverter}}"
+                                   Width="Auto" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Left"
+                                   FontSize="15"
+                                   Padding="10" MouseLeftButtonDown="OnLinkMouseLeftButtonDown" Tag="{Binding Next}"/>
+
+                    <TextBlock Grid.Column="2" Margin="0,0,5,0"
+                              Width="Auto" Height="38" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Stretch"
+                                   FontSize="15"
+                                   Padding="5" MouseLeftButtonDown="OnLinkMouseLeftButtonDown" Visibility="Hidden" Tag="{Binding Next}"/>
+
+                    <TextBlock Grid.Column="2" Margin="0,0,5,0"
+                               Text="{Binding Value, Mode=TwoWay, Converter={StaticResource LabelToLanguageTextConverter}}"
+                               Width="Auto" Height="38" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Right"
+                                   FontSize="15"
+                                   Padding="5" MouseLeftButtonDown="OnLinkMouseLeftButtonDown" Visibility="Visible" Tag="{Binding Next}"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!--Link with bit result value Type-->
+        <DataTemplate x:Key="LinkWithBitResultValueDataTemplate">
+            <Border  Style="{StaticResource UpdateBackgroundBorder}"
+                     MouseLeftButtonDown="OnLinkMouseLeftButtonDown" Tag="{Binding Next}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                                   Text="{Binding Label, Converter={StaticResource LabelToLanguageTextConverter}}"
+                                   Width="Auto" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Left"
+                                   FontSize="15"
+                                   Padding="10" MouseLeftButtonDown="OnLinkMouseLeftButtonDown" Tag="{Binding Next}"/>
+
+                    <TextBlock Grid.Column="2" Margin="0,0,5,0"
+                              Width="Auto" Height="38" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Stretch"
+                                   FontSize="15"
+                                   Padding="5" MouseLeftButtonDown="OnLinkMouseLeftButtonDown" Visibility="Hidden" Tag="{Binding Next}"/>
+
+                    <TextBlock Grid.Column="2" Margin="0,0,5,0"
+                               Text="{Binding Value, Mode=TwoWay}"
+                               Width="Auto" Height="38" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Right"
+                                   FontSize="15"
+                                   Padding="5" MouseLeftButtonDown="OnLinkMouseLeftButtonDown" Visibility="Visible" Tag="{Binding Next}"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!--Link with single choice result value Type-->
+        <DataTemplate x:Key="LinkWithSingleChoiseResultValueDataTemplate">
+            <Border  Style="{StaticResource UpdateBackgroundBorder}"
+                     MouseLeftButtonDown="OnLinkMouseLeftButtonDown" Tag="{Binding Next}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                                   Text="{Binding Label, Converter={StaticResource LabelToLanguageTextConverter}}"
+                                   Width="Auto" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Left"
+                                   FontSize="15"
+                                   Padding="10" MouseLeftButtonDown="OnLinkMouseLeftButtonDown" Tag="{Binding Next}"/>
+
+                    <TextBlock Grid.Column="2" Margin="0,0,5,0"
+                              Width="Auto" Height="38" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Stretch"
+                                   FontSize="15"
+                                   Padding="5" MouseLeftButtonDown="OnLinkMouseLeftButtonDown" Visibility="Hidden" Tag="{Binding Next}"/>
+
+                    <TextBlock Grid.Column="2" Margin="0,0,5,0"
+                               Text="{Binding Value, Mode=TwoWay, Converter={StaticResource LabelToLanguageTextConverter}}"
+                               Width="Auto" Height="38" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Right"
+                                   FontSize="15"
+                                   Padding="5" MouseLeftButtonDown="OnLinkMouseLeftButtonDown" Visibility="Visible" Tag="{Binding Next}"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!--Link Type-->
+        <DataTemplate x:Key="LinkDataTemplate">
+            <Border  Style="{StaticResource UpdateBackgroundBorder}"
+                     MouseLeftButtonDown="OnLinkMouseLeftButtonDown" Tag="{Binding Next}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                                   Text="{Binding Label, Converter={StaticResource LabelToLanguageTextConverter}}"
+                                   Width="Auto" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Left"
+                                   FontSize="15"
+                                   Padding="10" MouseLeftButtonDown="OnLinkMouseLeftButtonDown" Tag="{Binding Next}"/>
+
+                    <TextBlock Grid.Column="2" Margin="0,0,5,0"
+                              Width="Auto" Height="38" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Stretch"
+                                   FontSize="15"
+                                   Padding="5" MouseLeftButtonDown="OnLinkMouseLeftButtonDown" Visibility="Hidden" Tag="{Binding Next}"/>
+
+                    <TextBlock Grid.Column="2" Margin="0,0,5,0"
+                               Width="Auto" Height="38" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Right"
+                                   FontSize="15"
+                                   Padding="5" MouseLeftButtonDown="OnLinkMouseLeftButtonDown" Visibility="Visible" Tag="{Binding Next}"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!--Link UP Type-->
+        <DataTemplate x:Key="LinkUpDataTemplate">
+            <Border  Style="{StaticResource UpdateBackgroundBorder}"
+                     MouseLeftButtonDown="OnLinkMouseLeftButtonDown" Tag="{Binding Next}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="5"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                                   TextWrapping="Wrap"
+                                   Width="Auto" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Left"
+                                   FontSize="15"
+                                   Padding="10" MouseLeftButtonDown="OnLinkMouseLeftButtonDown" Tag="{Binding Next}">
+                        <InlineUIContainer>
+                            <Path Data="{StaticResource BACK_ARROW_000}"  VerticalAlignment="Center" 
+                                  Height="25" Width="35"
+                                  Stroke="White" StrokeThickness="2" Stretch="Fill"/>
+                        </InlineUIContainer>
+                    </TextBlock>
+
+                    <TextBlock Grid.Column="2" Margin="0,0,5,0"
+                              Width="Auto" Height="38" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Stretch"
+                                   FontSize="15"
+                                   Padding="5" MouseLeftButtonDown="OnLinkMouseLeftButtonDown" Visibility="Hidden" Tag="{Binding Next}"/>
+
+                    <TextBlock Grid.Column="2" Margin="0,5,0,0"
+                               Width="Auto" Height="38" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Right"
+                               FontSize="15"
+                               Padding="5" MouseLeftButtonDown="OnLinkMouseLeftButtonDown" Visibility="Visible" Tag="{Binding Next}"/>
+
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!--BorderedItem-->
+        <Style x:Key="BorderedItem" TargetType="ListViewItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <ContentPresenter />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <EventSetter Event="RequestBringIntoView" Handler="OnRequestBringIntoView"/>
+        </Style>
+
+        <!--Data Template Selector-->
+        <controls:SettingsDataTemplateSelector x:Key="SettingsDataTemplateSelector" />
+
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border  Grid.Row="0" BorderBrush="SteelBlue" BorderThickness="1" Background="SteelBlue">
+            <ListView x:Name="MainListView" Margin="0,0,0,0"  Background="SteelBlue"                         
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                        ItemsSource="{Binding ItemSource, Mode=TwoWay}"
+                        ItemTemplateSelector="{StaticResource SettingsDataTemplateSelector}"
+                        ItemContainerStyle="{StaticResource BorderedItem}"
+                        ScrollViewer.ScrollChanged="ListViewScrollChanged">
+            </ListView>
+        </Border>
+ 
+    </Grid>
+</controls:DisposableUserControl>

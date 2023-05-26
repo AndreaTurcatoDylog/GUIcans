@@ -1,0 +1,111 @@
+﻿<core:DisposableUserControl x:Class="SpeedDetailsImageVisualizer.FiltersSetting"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:core="clr-namespace:Core;assembly=Core"
+        xmlns:local="clr-namespace:SpeedDetailsImageVisualizer"
+        mc:Ignorable="d" 
+        d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <core:BooleanToVisibilityConverter x:Key="BooleanToVisibilityCollapsedConverter" True="Visible" False="Collapsed"/>
+    </UserControl.Resources>
+    
+    <Grid>
+        <!--Filters Settings-->
+        <Border Grid.Row="0" Background="White"                        
+            BorderBrush="Black" BorderThickness="2,2,2,2"              
+            Visibility="{Binding Filters.AreFiltersOpened, Converter={StaticResource BooleanToVisibilityCollapsedConverter}}"
+            VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!--Title-->
+                <Border Grid.Row="0" BorderBrush="Black" Background="DarkBlue" BorderThickness="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=Label_Filters_Title,  Source={StaticResource Resources}}"
+                            Foreground="White" FontSize="18"
+                            HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3"/>
+                        
+                        <!--Exit button-->
+                        <Button Grid.Column="1" Command="{Binding OpenFiltersCommand}">
+                            <Image x:Name="img1"  Source="{StaticResource MenuExitButtonIcon}" Stretch="Uniform" 
+                                 VerticalAlignment="Center" HorizontalAlignment="Center" Width="25" Height="13" />
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="1">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="red"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
+                </Border>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,8,0">
+                    <!--The DateTime Filters-->
+                    <core:DateTimeFiltersUserControl 
+                                    From="{Binding Filters.TempFromDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                    To="{Binding Filters.TempToDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    AreFiltersEnabled="True"
+                                    FilterChangedCommand="{Binding FilterChangedCommand}"/>
+                </StackPanel>
+
+                <!--The File Name Filter-->
+                <StackPanel Grid.Row="2" Orientation="Vertical" Margin="0,17,10,0" VerticalAlignment="Top">
+                    <TextBlock Text="{Binding Label_FileName, Source={StaticResource Resources}}" 
+                                        FontSize="15" Margin="10,0,0,5"/>
+
+                    <core:TextBoxKeyboard DisableKeyboard="true"
+                                        Text="{Binding Filters.TempFileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        VerticalAlignment="Top" HorizontalAlignment="Left"
+                                        HorizontalContentAlignment="Left" VerticalContentAlignment="Center" 
+                                        Width="250" Height="36" FontSize="18" 
+                                        Margin="10,0,0,0">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Enter" Command="{Binding FilterChangedCommand}" />
+                        </TextBox.InputBindings>
+                    </core:TextBoxKeyboard>
+                </StackPanel>
+
+                <!--Filter Buttons-->
+                <DockPanel Grid.Row="3" VerticalAlignment="Bottom"
+                                HorizontalAlignment="Left"
+                                Margin="0,25,0,25">
+                    <Button Content="{Binding Label_Apply, Source={StaticResource Resources}}" 
+                                    Style="{StaticResource HighlightedPressedButtonStyle}" 
+                                    Width="100" Height="40"
+                                    Command ="{Binding FilterChangedCommand}"
+                                    Margin="17,0,0,0"/>
+                    <Button Content="{Binding Label_Clear, Source={StaticResource Resources}}"   
+                                    Style="{StaticResource HighlightedPressedButtonStyle}" 
+                                    Width="100" Height="40"               
+                                    Command="{Binding ClearFiltersCommand}"
+                                    Margin="17,0,0,0"/>
+                </DockPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</core:DisposableUserControl>

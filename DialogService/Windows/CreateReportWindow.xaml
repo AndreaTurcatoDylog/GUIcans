@@ -1,0 +1,98 @@
+﻿<core:DialogBaseWindow x:Class="DialogService.CreateReportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"          
+        xmlns:core="clr-namespace:Core;assembly=Core"
+        xmlns:local="clr-namespace:DialogService"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"  
+        ShowInTaskbar="False" ResizeMode="NoResize" 
+        WindowStyle="None" Topmost="True"
+        Width="500" Height="163">
+
+    <Window.Resources>
+        <core:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" True="Visible" False="Hidden"/>
+        <core:BooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" True="Hidden" False="Visible"/>
+        <local:ConvertigStatusToStatusColorConverter x:Key="ConvertigStatusToStatusColorConverter"/>
+    </Window.Resources>
+
+    <Grid>
+        <!--Body rectangle-->
+        <Rectangle Stroke="Black" StrokeThickness="2">
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0.9,0.5"  EndPoint="0,1" Opacity="0.8">
+                    <GradientStop Color="White" Offset="0"/>
+                    <GradientStop Color="Wheat" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <StackPanel Orientation="Vertical" VerticalAlignment="Stretch">
+            <Grid>
+                <Rectangle Fill="{Binding CreateReportStatus, Converter={StaticResource ConvertigStatusToStatusColorConverter}}"
+                           Margin="2,2,2,0"/>
+                <TextBlock Text="{Binding ProgressMessage, Mode=TwoWay}" 
+                           Foreground="White" FontWeight="DemiBold" FontSize="16"
+                           HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5"/>
+            </Grid>
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,13,0,0">
+
+                <!-- Save In Message -->
+                <TextBlock Text="{Binding Path=Label_Save_In, Source={StaticResource Resources}}" 
+                           FontSize="17" FontWeight="SemiBold" Margin="18,0,0,0"/>
+
+                <!-- Report Save Path -->
+                <core:PathTrimTextBlock x:Name="PathTextBlock" 
+                                   FontSize="17" FontWeight="SemiBold"
+                                   Offset="10" CharacterSeparator=">"
+                                   SourceText="{Binding ReportFileNamePath}"
+                                   HorizontalAlignment="Stretch"
+                                   VerticalAlignment="Center"
+                                   Width="310"
+                                   TextWrapping="NoWrap" Margin="0,0,110,0">
+                </core:PathTrimTextBlock>
+
+                <StackPanel Orientation="Horizontal" Margin="15,-20,0,0">
+                    <ProgressBar x:Name="CreateReportProgressBar" Minimum="0" 
+                                 Maximum="{Binding MaxProgressValue, Mode=TwoWay}" 
+                                 OverridesDefaultStyle ="false"
+                                 Value="{Binding ExportProgressValue, Mode=TwoWay}" 
+                                 Foreground="{Binding CreateReportStatus, Converter={StaticResource ConvertigStatusToStatusColorConverter}}"
+                                 Height="30" Width="330" Margin="0"/>
+                    <Grid>
+                        <!--Progress Percentage-->
+                        <TextBlock FontSize="17" FontWeight="SemiBold"
+                               Visibility="{Binding IsConverting, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                               Margin="15,27,15,10">
+                        <Run Text="{Binding Path=ConvertingPercentageMessage}"/>
+                        <Run Text="%" />
+                        </TextBlock>
+
+                        <!--Buttons-->                                               
+                        <!--Abort Button-->
+                        <core:ImageButton Grid.Column="1" Grid.Row="2" 
+                            Style="{StaticResource CustomLittleButtonBackStyle}"
+                            Visibility="{Binding IsConverting, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Content="Abort" Background="{StaticResource FlatDarkBlue}"
+                            ImageButtonPath ="{StaticResource CANCEL}"                            
+                            ImageButtonContentMargin="0,40,0,0"
+                            HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="70,0,15,15"
+                            Command="{Binding AbortCommand}"/>
+
+                        <!--Exit Button-->
+                        <core:ImageButton x:Name="ExitButton" Grid.Column="1" Grid.Row="2" 
+                            Visibility="{Binding IsConverting, Mode=TwoWay, Converter={StaticResource InvertedBooleanToVisibilityConverter}}"
+                            HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="70,0,15,15"
+                            Command="{Binding ExitCommand}"/>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        <Grid.Effect>
+            <DropShadowEffect Direction="-45" BlurRadius="4" ShadowDepth="7" Opacity="0.5"/>
+        </Grid.Effect>
+    </Grid>
+</core:DialogBaseWindow>

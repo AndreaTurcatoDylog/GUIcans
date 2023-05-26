@@ -1,0 +1,491 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Core">
+
+    <!--Converters-->
+    <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" True="Visible" False="Hidden"/>
+
+    <!--FocusVisualStyle for all Framework element-->
+    <Style TargetType="{x:Type FrameworkElement}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+    </Style>
+
+    <!--PathTrimTextBlock-->
+    <Style TargetType = "{x:Type local:PathTrimTextBlock}" BasedOn = "{StaticResource {x:Type TextBlock}}">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=SourceText}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--AdjustablePanel-->
+    <Style TargetType = "{x:Type local:AdjustablePanel}"/>
+
+    <!--ToggleButtonActive-->
+    <Style TargetType="{x:Type local:ToggleButtonActive}" BasedOn = "{StaticResource {x:Type ToggleButton}}"/>
+
+    <!--TextBoxKeyboard-->
+    <Style TargetType="{x:Type local:TextBoxKeyboard}" BasedOn = "{StaticResource {x:Type TextBox}}">
+        <Setter Property="FontSize" Value="{StaticResource TextBoxFontSize}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Padding" Value="0,0,0,6"/>
+        <Style.Triggers>
+            <Trigger Property="IsWritingMode" Value="true">
+                <Setter Property="Background" Value="{StaticResource WritingModeBackgroundBrush}"/>
+                <Setter Property="TextBlock.FontWeight" Value="SemiBold"/>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect Direction="-45" BlurRadius="4" ShadowDepth="4" Opacity="0.5"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--NumericTextBoxKeyboard-->
+    <Style TargetType="{x:Type local:NumericTextBoxKeyboard}" BasedOn = "{StaticResource {x:Type TextBox}}">
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Style.Triggers>
+            <Trigger Property="IsWritingMode" Value="true">
+                <Setter Property="Background" Value="{StaticResource WritingModeBackgroundBrush}"/>
+                <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect Direction="-45" BlurRadius="4" ShadowDepth="4" Opacity="0.5"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsOutOfRange" Value="true">
+                <Setter Property="Background" Value="Red"/>
+                <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect Direction="-45" BlurRadius="4" ShadowDepth="4" Opacity="0.5"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
+    <!--CalendarTextBoxKeyboard-->
+    <Style TargetType="{x:Type local:CalendarTextBoxKeyboard}" BasedOn = "{StaticResource {x:Type TextBox}}">
+        <Style.Triggers>
+            <Trigger Property="IsWritingMode" Value="true">
+                <Setter Property="Background" Value="{StaticResource WritingModeBackgroundBrush}"/>
+                <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect Direction="-45" BlurRadius="4" ShadowDepth="4" Opacity="0.5"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="LightGray"/>
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
+    <!--ICSButton-->
+    <Style x:Key="ICSButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="RootGrid">
+                        <Image  Source="{StaticResource ICS}" 
+                                Stretch="Uniform"
+                                VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="RootGrid" Property="RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--MagnifyingGlassButton-->
+    <Style x:Key="MagnifyingGlassButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="RootGrid">
+                        <Image  Source="{StaticResource MagnifyingGlass}" 
+                                Stretch="Uniform"
+                                VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="RootGrid" Property="RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--Image Button-->
+    <Style TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Margin" Value="15"/>
+        <Setter Property="Stylus.IsPressAndHoldEnabled" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ImageButton">
+                    
+                    <Grid x:Name="RootGrid" OverridesDefaultStyle="True">
+
+                        <Border Background="Transparent" BorderThickness="0" BorderBrush="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                            <Path x:Name="IconPath" Stroke="{TemplateBinding Button.BorderBrush}" Fill="{ TemplateBinding Button.Background }" 
+                              HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Height="Auto" 
+                              RenderTransformOrigin="0.5,0.5" Stretch="Fill" 
+                                  Data="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(local:ImageButton.ImageButtonPath)}"
+                              StrokeThickness="0">
+                                <Path.Effect>
+                                    <DropShadowEffect Direction="-45" BlurRadius="4" ShadowDepth="4" Opacity="0.5"/>
+                                </Path.Effect>
+                            </Path>
+                        </Border>
+
+                        <ContentPresenter  Content="{TemplateBinding Content}"  
+                                           TextBlock.FontFamily="{TemplateBinding FontFamily}"  
+                                           TextBlock.FontSize="{TemplateBinding FontSize}"  
+                                           TextBlock.Foreground="{TemplateBinding Foreground}"  
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                                           Margin="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(local:ImageButton.ImageButtonContentMargin)}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+
+                        <!--IsEnabled-->
+                        <Trigger Property ="local:ImageButton.IsEnabled" Value ="false">
+                            <Setter Property="Background" Value="DarkGray"/>
+                        </Trigger>
+
+                        <!--IsTouched-->
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(local:ImageButton.IsTouched)}" Value="True">
+                            <!--<Setter TargetName="IconPath" Property="Path.Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="Transparent" Direction="120"  ShadowDepth="4" Opacity="0.5"/>
+                                </Setter.Value>
+                            </Setter>-->
+                            <Setter TargetName="RootGrid" Property="RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="0.99" ScaleY="0.99"/>
+                                </Setter.Value>
+                            </Setter>
+
+                            <Setter TargetName="IconPath" Property="Path.Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="Transparent" Direction="120"  ShadowDepth="4" Opacity="0.5"/>
+                                </Setter.Value>
+                            </Setter>
+
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="0.99" ScaleY="0.99"/>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+
+                        <!--IsPressed-->
+                        <Trigger Property ="IsPressed" Value ="True">
+                            <!--<Setter TargetName="IconPath" Property="Path.Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="Transparent" Direction="120"  ShadowDepth="4" Opacity="0.5"/>
+                                </Setter.Value>
+                            </Setter>-->
+                            <Setter TargetName="RootGrid" Property="RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="0.99" ScaleY="0.99"/>
+                                </Setter.Value>
+                            </Setter>
+
+                            <Setter TargetName="IconPath" Property="Path.Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect  Direction="-45" BlurRadius="4" ShadowDepth="0" Opacity="0"/>
+                                </Setter.Value>
+                            </Setter>
+
+                            <!--<Setter Property="Content">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="0.99" ScaleY="0.99"/>
+                                </Setter.Value>
+                            </Setter>-->
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--PaginationSettingContainerButton-->
+    <Style TargetType="{x:Type local:PaginationSettingContainerButton}" BasedOn = "{StaticResource {x:Type RadioButton}}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:PaginationSettingContainerButton">
+
+                    <Grid x:Name="RootGrid">
+                        <Rectangle x:Name="RectangleMain"  
+                                   Fill="{StaticResource GradiantLightSteel}" Stroke="Black" StrokeThickness="1" />
+
+                        <TextBlock x:Name="TitleTextBlock" Grid.Column="0"
+                                   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(local:PaginationSettingContainerButton.TitleText)}"
+                                   Width="Auto" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Left"
+                                   FontSize="20" FontWeight="SemiBold"
+                                   Padding="10,10,10,10" Margin="0,0,0,5"/>
+
+                        <Rectangle x:Name="RectangleReject" Fill="{StaticResource LinearIndianRed}"  
+                                   HorizontalAlignment="Right" Width="80"
+                                   Stroke="Black" StrokeThickness="1"
+                                   Visibility="Collapsed"/>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property ="IsChecked" Value ="True">
+                            <Setter TargetName="RectangleMain" Property="Fill" Value="{StaticResource GradiantTeal}"/>
+                            <Setter TargetName="RectangleMain" Property="Stroke" Value="Black"/>
+                        </Trigger>
+
+                        <Trigger Property ="IsElementModified" Value ="True">
+                            <Setter TargetName="RectangleMain" Property="Stroke" Value="DarkOrange" />
+                            <Setter TargetName="RectangleMain" Property="StrokeThickness" Value="3" />
+                            <Setter TargetName="TitleTextBlock" Property="Foreground" Value="White" />
+
+                            <Setter TargetName="RectangleReject" Property="Stroke" Value="DarkOrange" />
+                            <Setter TargetName="RectangleReject" Property="StrokeThickness" Value="3" />
+                        </Trigger>
+
+                        <Trigger Property ="IsRejectFound" Value ="True">
+                            <Setter TargetName="RectangleReject" Property="Visibility" Value="Visible" />
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--PaginationButton-->
+    <Style TargetType="{x:Type local:PaginationButton}" BasedOn = "{StaticResource {x:Type RadioButton}}">
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect Direction="-45" BlurRadius="4" ShadowDepth="4" Opacity="0.5"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:PaginationButton">
+                    <Grid x:Name="RootGrid">
+                        <Rectangle x:Name="RectangleMain"  
+                                   Fill="#f2f2f2" Stroke="Black" StrokeThickness="1" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property ="IsChecked" Value ="True">
+                            <Setter TargetName="RectangleMain" Property="Fill" Value="#fffea1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--ImagePaginationButton-->
+    <Style TargetType="{x:Type local:ImagePaginationButton}" BasedOn = "{StaticResource {x:Type local:PaginationButton}}">
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect Direction="-45" BlurRadius="4" ShadowDepth="4" Opacity="0.5"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:PaginationButton">
+                    <Grid x:Name="RootGrid">
+
+                        <Border Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                            <Path x:Name="IconPath" Stroke="{TemplateBinding Button.BorderBrush}" Fill="{ TemplateBinding Button.Background }" 
+                              HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Height="Auto" 
+                              RenderTransformOrigin="0.5,0.5" Stretch="Fill" 
+                                  Data="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(local:ImagePaginationButton.ImageButtonPath)}"
+                              StrokeThickness="0">
+                                <Path.Effect>
+                                    <DropShadowEffect Direction="-45" BlurRadius="4" ShadowDepth="4" Opacity="0.5"/>
+                                </Path.Effect>
+                            </Path>
+                        </Border>
+
+                        <ContentPresenter  Content="{TemplateBinding Content}"  
+                                           TextBlock.FontFamily="{TemplateBinding FontFamily}"  
+                                           TextBlock.FontSize="{TemplateBinding FontSize}"  
+                                           TextBlock.Foreground="{TemplateBinding Foreground}"  
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                                           Margin="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(local:ImagePaginationButton.ImageButtonContentMargin)}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property ="IsChecked" Value ="True">
+                            <Setter  Property="Background" Value="{StaticResource LinearGradiantBlanchedAlmond}" />
+                        </Trigger>
+                        <Trigger Property ="IsChecked" Value ="false">
+                            <Setter  Property="Background" Value="{StaticResource LinearGradiantSilver}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--PaginationSettingButton-->
+    <Style TargetType="{x:Type local:PaginationSettingButton}" BasedOn = "{StaticResource {x:Type local:PaginationButton}}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:PaginationSettingButton">
+
+                    <Grid x:Name="RootGrid">
+                        <Rectangle x:Name="RectangleMain"  
+                                   Fill="{StaticResource LinearGradiantSilver}" Stroke="Black" StrokeThickness="1" />
+
+                        <Rectangle x:Name="RectangleUpdate" Fill="{StaticResource GradiantFlatOrange}"  
+                                   HorizontalAlignment="Left" VerticalAlignment="Top"
+                                   Height="20" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Width}"
+                                   Stroke="Black" StrokeThickness="1"
+                                   Visibility="Collapsed"/>
+
+                        <Rectangle x:Name="RectangleReject" Fill="{StaticResource LinearIndianRed}"  
+                                   HorizontalAlignment="Right" VerticalAlignment="Top"
+                                   Height="20" Width="20"
+                                   Stroke="Black" StrokeThickness="1"
+                                   Visibility="Collapsed"/>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property ="IsChecked" Value ="True">
+                            <Setter TargetName="RectangleMain" Property="Fill" Value="{StaticResource LinearGradiantBlanchedAlmond}" />
+                        </Trigger>
+
+                        <Trigger Property ="IsElementModified" Value ="True">
+                            <Setter TargetName="RectangleUpdate" Property="Visibility" Value="Visible" />
+                        </Trigger>
+
+                        <Trigger Property ="IsRejectFound" Value ="True">
+                            <Setter TargetName="RectangleReject" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--TabItemClosable-->
+    <Style TargetType="{x:Type local:TabItemClosable}" BasedOn = "{StaticResource {x:Type TabItem}}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:TabItemClosable">
+                    <Grid>
+                        <Border Name="Border" Background="#FF6E6C67" Margin="-2,2,5,-1" BorderBrush="Black" 
+                                    BorderThickness="1,1,1,0" CornerRadius="10,10,0,0">
+                            <ContentPresenter x:Name="ContentSite" ContentSource="Header" 
+                                            VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" RecognizesAccessKey="True"/>
+                        </Border>
+                        <Rectangle Height="0" Width="0" Margin="0,0,-10,0" Stroke="Black" VerticalAlignment="Bottom" HorizontalAlignment="Center" StrokeThickness="0" Fill="#FFD4D0C8"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="FontWeight" Value="Bold" />
+                            <Setter TargetName="Border" Property="Background" Value="#FFD4D0C8" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="ContentSite" Property="Width" Value="0" />
+                            <Setter TargetName="Border" Property="Background" Value="#FF6E6C67" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="HeaderTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Grid x:Name="HeaderTemplateGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <ContentPresenter Grid.Column="0" Content="{TemplateBinding Content}" HorizontalAlignment="Center" 
+                                          Margin="10,0,10,0"/>
+
+                        <!--Close Button-->
+                        <Button x:Name="CloseButton" Grid.Column="1" Style="{StaticResource ICSButtonStyle}" 
+                                Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabItem}}, 
+                                        Path=CanClose, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                Width="20" Height="20" Margin="0,-3,10,0"                        
+                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabItem}}, 
+                                            Path=CloseTabItemCommand}"/>
+                    </Grid>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background" Value="#FF6E6C67" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Width" Value="Auto" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="FontFamily" Value="DokChampa" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="UseLayoutRounding" Value="False" />
+    </Style>
+
+    <!--TextBoxWatermarks-->
+    <Style TargetType="{x:Type local:TextBoxWatermarks}" BasedOn = "{StaticResource {x:Type TextBox}}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:TextBoxWatermarks">
+                    <Grid>
+                        <DockPanel LastChildFill="True">
+                            <TextBox x:Name="OriginalTextBox" DockPanel.Dock="Top"
+                                Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text}"
+                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel LastChildFill="True">
+                            <TextBlock DockPanel.Dock="Top"                                 
+                                Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(local:TextBoxWatermarks.WaterMarkText)}"                                
+                                IsHitTestVisible="False" TextWrapping="Wrap"                                                                          
+                                Foreground="Gray"
+                                VerticalAlignment="Center" HorizontalAlignment="Center"                                
+                                Margin="0,0,0,0">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=OriginalTextBox, Path=Text}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </DockPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

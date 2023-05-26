@@ -1,0 +1,50 @@
+﻿<ResourceDictionary  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                    xmlns:local="clr-namespace:Core">
+
+
+    <local:LabelToLanguageTextConverter x:Key="LabelToLanguageTextConverter" />
+
+    <!--MessageBox: DarkOrange -->
+    <Style  x:Key="DarkOrangeMessageBoxStyle" TargetType="{x:Type local:CustomMessageBox}">
+        <Setter Property="RectangleTitleColorFill" Value="{StaticResource GradiantDarkOrange}"/>
+        <Setter Property="RectangleBodyColor" Value="DarkOrange"/>
+    </Style>
+
+    <!--MessageBox: DarkGreen -->
+    <Style  x:Key="DarkGreenMessageBoxStyle" TargetType="{x:Type local:CustomMessageBox}">
+        <Setter Property="RectangleTitleColorFill" Value="{StaticResource GradiantDarkGreen}"/>
+        <Setter Property="RectangleBodyColor" Value="DarkGreen"/>
+    </Style>
+
+    <!--MessageBox: DarkRed -->
+    <Style  x:Key="DarkRedMessageBoxStyle" TargetType="{x:Type local:CustomMessageBox}">
+        <Setter Property="RectangleTitleColorFill" Value="{StaticResource GradiantDarkRed}"/>
+        <Setter Property="RectangleBodyColor" Value="DarkRed"/>
+    </Style>
+
+    <!--MessageBox: DarkBlue -->
+    <Style  x:Key="DarkBlueMessageBoxStyle" TargetType="{x:Type local:CustomMessageBox}">
+        <Setter Property="RectangleTitleColorFill" Value="{StaticResource GradiantDarkBlue}"/>
+        <Setter Property="RectangleBodyColor" Value="DarkBlue"/>
+    </Style>
+
+    <!--MessageBox: Warning -->
+    <Style  x:Key="WarningMessageBoxStyle" TargetType="{x:Type local:CustomMessageBox}" BasedOn="{StaticResource DarkOrangeMessageBoxStyle}">
+        <Setter Property="CaptionMessage" Value="{Binding Label_Warning,  Source={StaticResource Resources}}"/>
+    </Style>
+
+
+    <!--MessageBox: Error -->
+    <Style  x:Key="ErrorMessageBoxStyle" TargetType="{x:Type local:CustomMessageBox}" BasedOn="{StaticResource DarkRedMessageBoxStyle}">
+        <Setter Property="CaptionMessage" Value="{Binding Label_Error, Source={StaticResource Resources}}"/>
+    </Style>
+
+    <!--MessageBox: Confirm -->
+    <Style  x:Key="ConfirmMessageBoxStyle" TargetType="{x:Type local:CustomMessageBox}" BasedOn="{StaticResource DarkBlueMessageBoxStyle}">
+        <Setter Property="CaptionMessage" Value="{Binding Path=Label_Confirm, Source={StaticResource Resources}}"/>
+    </Style>
+
+</ResourceDictionary>

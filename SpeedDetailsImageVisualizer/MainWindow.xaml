@@ -1,0 +1,389 @@
+﻿<!--Set the WindowState to Maximaze whether the application is stand alone. 
+    Minimize if it is a hosted (client) application -->
+<core:ToolWindow x:Class="SpeedDetailsImageVisualizer.MainWindow"
+        x:Name="MainViewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SpeedDetailsImageVisualizer"
+        xmlns:core="clr-namespace:Core;assembly=Core"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        mc:Ignorable="d"                       
+        Top="0" Left="0" MinHeight="740"  MinWidth="1250"     
+        WindowStyle="None"
+        ResizeMode="CanResize"                
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        ContentRendered="OnWindowContentRendered"
+        SizeChanged="OnWindowSizeChanged"
+        MouseLeftButtonDown="OnWindowMouseLeftButtonDown"
+        Closing="OnClosing">
+   
+    <Window.Resources>
+        <!--Browse Button Style-->
+        <Style  x:Key="BrowseButtonStyle" TargetType="{x:Type core:ImageButton}"  BasedOn="{StaticResource {x:Type core:ImageButton}}">
+            <Setter Property="Background" Value="Black" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <!--ICSButtonWithHintStyle-->
+        <Style x:Key="ICSButtonWithHintStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource ICSButtonStyle}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="ToolTip" Value="{Binding Path=Message_Reset_Filter, Source={StaticResource Resources}}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+        <!--Menu Button Style-->
+        <Style x:Key="MenuButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#1f418c"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--Menu Exit Button Style-->
+        <Style x:Key="MenuExitButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <Grid>
+                                <Image Name="img1" Source="{StaticResource MenuExitButtonIcon}" Stretch="Uniform" 
+                                    VerticalAlignment="Center" HorizontalAlignment="Center" Width="25" Height="13" />
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--Converters-->
+        <core:LabelToLanguageTextConverter x:Key="LabelToLanguageTextConverter" />
+        <local:IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
+        <core:MultiBooleanToVisibilityConverter x:Key="MultiBooleanToVisibilityConverter" True="Visible" False="Collapsed"/>
+        <core:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+        <core:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" True="Visible" False="Hidden"/>
+        <core:BooleanToVisibilityConverter x:Key="BooleanToVisibilityCollapsedConverter" True="Visible" False="Collapsed"/>
+        <core:BooleanToVisibilityConverter x:Key="NegativeBooleanToVisibilityConverter" True="Hidden" False="Visible"/>
+        <core:BooleanToVisibilityConverter x:Key="NegativeBooleanToVisibilityCollapsedConverter" True="Collapsed" False="Visible"/>
+        <core:BooleanToEnabledConverter x:Key="BooleanToEnabledConverter" True="true" False="false"/>
+        <core:BooleanToEnabledConverter x:Key="NegativeBooleanToEnabledConverter" True="false" False="true"/>
+        <local:ConvertPathToViewFormatPathConverter x:Key="ConvertPathToViewFormatPathConverter"/>
+
+    </Window.Resources>
+   
+        <Border BorderBrush="Silver" BorderThickness="1" >
+            <DockPanel x:Name="RootWindow" >
+                <DockPanel x:Name="TitleBar" DockPanel.Dock="Top"  
+                    Visibility="{Binding IsChildApplication,  Mode=OneWay, Converter={StaticResource NegativeBooleanToVisibilityCollapsedConverter}}"
+                    IsVisibleChanged="TitleBarIsVisibleChanged">
+
+                    <!--Menu-->
+                    <DockPanel  Margin="0,0,0,0">
+                        <Menu DockPanel.Dock="Top" Background="{StaticResource FlatDarkBlue}" BorderThickness="0" Margin="0,0,0,0">
+                            <MenuItem Style="{StaticResource MenuItemStyle}"  FontSize="20" Foreground="White" Width="70" Height="35"
+                                  Margin="0,0,0,0">
+                                <MenuItem.Icon>
+                                    <Image Source="{StaticResource MenuIcon}" Stretch="Uniform"  Width="25" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </MenuItem.Icon>
+                            <MenuItem Header="{Binding Label_Create_Report, Source={StaticResource Resources}}" Foreground="Black" 
+                                    Command="{Binding CreateReportCommand}"/>
+                            <MenuItem Header="{Binding Label_Options, Source={StaticResource Resources}}" Foreground="Black" Command="{Binding OptionsCommand}"/>
+                                <Separator Foreground="Black"/>
+                                <MenuItem Header="{Binding Label_Exit, Source={StaticResource Resources}}" Foreground="Black" 
+                                    Command="{Binding ExitCommand, RelativeSource={RelativeSource AncestorType=core:ToolWindow}}"/>
+                            </MenuItem>
+                        </Menu>
+                    </DockPanel>
+
+                    <!--Exit Menu Button-->
+                    <Border DockPanel.Dock="Right"  Background="{StaticResource FlatDarkBlue}" BorderBrush="Black" BorderThickness="0">
+                        <Button x:Name="CloseButton" Style="{StaticResource MenuExitButtonStyle}"  BorderBrush="{StaticResource FlatDarkBlue}" BorderThickness="0"
+                            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                            Command="{Binding ExitCommand}" CommandParameter="{Binding ElementName=MainViewWindow}"
+                            Width="45" Height="35">
+                        </Button>
+                    </Border>
+
+                    <!--Massimaze Menu Button-->
+                    <Border DockPanel.Dock="Right" Background="{StaticResource FlatDarkBlue}" BorderBrush="Black" BorderThickness="1">
+                        <Button x:Name="MaxButton" Style="{StaticResource MenuButtonStyle}" BorderBrush="{StaticResource FlatDarkBlue}" BorderThickness="0"
+                            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                            Command="{Binding MassimazeCommand}" CommandParameter="{Binding ElementName=MainViewWindow}"
+                            Width="45" Height="35">
+                            <Image Source="{StaticResource MenuMassimizeButtonIcon}" Stretch="Uniform" 
+                               VerticalAlignment="Center" HorizontalAlignment="Center" Width="20" Height="15"/>
+                        </Button>
+                    </Border>
+
+                    <!--Minimaze Menu Button-->
+                    <Border DockPanel.Dock="Right"  Background="{StaticResource FlatDarkBlue}" 
+                        BorderBrush="{StaticResource FlatDarkBlue}" BorderThickness="0">
+                        <Button x:Name="MinButton" Style="{StaticResource MenuButtonStyle}" BorderBrush="{StaticResource FlatDarkBlue}" BorderThickness="0"
+                            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                            Command="{Binding MinimazeCommand}" CommandParameter="{Binding ElementName=MainViewWindow}"
+                            Width="45" Height="35">
+                            <Image Source="{StaticResource MenuMinimizeButtonIcon}" Stretch="Uniform" 
+                               VerticalAlignment="Center" HorizontalAlignment="Center" Width="17" Height="13"/>
+                        </Button>
+                    </Border>
+
+                    <!--Border-->
+                    <Border Background="{StaticResource FlatDarkBlue}" BorderBrush="Black" BorderThickness="1">
+                        <Border.InputBindings>
+                            <MouseBinding Gesture="LeftDoubleClick" 
+                                  Command="{Binding MassimazeCommand}" CommandParameter="{Binding ElementName=MainViewWindow}">
+                            </MouseBinding>
+                        </Border.InputBindings>
+                        <TextBlock Text="{Binding Title}" 
+                           Foreground="White" FontSize="19"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                           Margin="0,0,0,0"/>
+                    </Border>
+                </DockPanel>
+
+                <!--Main Grid-->
+                <Grid x:Name="LayoutRoot" IsSharedSizeScope="True" 
+                      Background="Silver">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--Number of images And Path-->
+                    <Border BorderBrush="Black" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"  
+                    BorderThickness="1,1,1,1" Background="White" Height="60" 
+                    HorizontalAlignment="Center" Margin="23,10,23,0">
+                        <Border.Effect>
+                            <DropShadowEffect Direction="-45" BlurRadius="4" ShadowDepth="5" Opacity="0.5"/>
+                        </Border.Effect>
+
+                        <Grid Height="58" VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--Number of Pages-->
+                            <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" 
+                            Background="#ADCBF3" CornerRadius="0" Width="185" Margin="10,8,0,8">
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="21">
+                                <Run Text="{Binding Path=Label_Pages, Mode=OneWay, Source={StaticResource Resources}}" Foreground="DarkBlue"/>
+                                <Run Text="{Binding ElementName=PaginationUserControl, Path=PageNumber, Mode=OneWay}" Foreground="Black" />
+                                <Run Text="/" Foreground="Black"/>
+                                <Run Text="{Binding ElementName=PaginationUserControl, Path=TotalPages, Mode=OneWay}" Foreground="DarkBlue" />
+                                </TextBlock>
+                            </Border>
+
+                            <!--Number of images-->
+                            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" 
+                            Background="#ADCBF3" CornerRadius="0" Width="215" Margin="10,8,0,8">
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="21">
+                                <Run Text="{Binding Path=Label_Images, Mode=OneWay, Source={StaticResource Resources}}" Foreground="DarkBlue"/>
+                                <Run Text="{Binding ImageIndex, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" />
+                                <Run Text="/" Foreground="Black"/>
+                                <Run Text="{Binding NumberOfImages}" Foreground="DarkBlue" />
+                                </TextBlock>
+                            </Border>
+
+                            <!-- Path -->
+                            <Border x:Name="PathBorder" Grid.Column="2" BorderBrush="Black" BorderThickness="1" 
+                            Background="#ADCBF3" HorizontalAlignment="Stretch"
+                            CornerRadius="0" Margin="10,8,10,8">
+                                <StackPanel Orientation="Horizontal" Margin="8,0,0,0">
+                                    <Label Content="Path:" VerticalAlignment="Center"
+                                    Foreground="DarkBlue" FontSize="21"/>
+                                    <core:PathTrimTextBlock x:Name="PathTextBlock" 
+                                   Offset="75" CharacterSeparator=">"
+                                   SourceText="{Binding PathImagesFolder, UpdateSourceTrigger=PropertyChanged,
+                                                 Converter={StaticResource ConvertPathToViewFormatPathConverter}}" 
+                                   Width="{Binding ElementName=PathBorder, Path=ActualWidth}"
+                                   VerticalAlignment="Center"
+                                   FontSize="21" TextWrapping="NoWrap">
+                                    </core:PathTrimTextBlock>
+                                </StackPanel>
+                            </Border>
+
+                            <!--Browse Button-->
+                            <core:ImageButton Grid.Column="3" Style="{StaticResource BrowseButtonStyle}"
+                                ImageButtonPath="{StaticResource BTN_BROWSER}"                                                                           
+                                IsEnabled="{Binding IsLoadingImages, Mode=OneWay, Converter={StaticResource NegativeBooleanToEnabledConverter}}"
+                                FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+                                Width="43" Height="43"
+                                VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"   
+                                Command="{Binding FolderDialogCommand}">
+                            </core:ImageButton>
+                        </Grid>
+                    </Border>
+
+                    <!--Thumbnails-->
+                    <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"                  
+                        IsEnabled="{Binding IsLoadingImages, Mode=OneWay, Converter={StaticResource NegativeBooleanToEnabledConverter}}"
+                        Visibility="{Binding IsErrorOccured, Mode=OneWay, Converter={StaticResource NegativeBooleanToVisibilityConverter}}"
+                        Height="{Binding ElementName=ZoomImageUserControl, Path=ActualHeight}"
+                        Margin="15,10,0,10">
+
+                        <!--PaginationUserControl-->
+                        <core:PaginationUserControl x:Name="PaginationUserControl"
+                        IsEnabled="{Binding IsLoadingImages, Mode=OneWay, Converter={StaticResource NegativeBooleanToEnabledConverter}}"
+                        GroupName ="Thumbnails" PaginationButtonWidth="75"                      
+                        NumberOfElements="{Binding NumberOfImages}" Value="{Binding PageIndex, Mode=TwoWay}"
+                        NumberOfElementInPage="{Binding NumberOfImagesInPage}"
+                        Margin="5,0,2,0" >
+                        </core:PaginationUserControl>
+
+                        <!--Thumbnails-->
+                        <local:ThumbnailsUserControl ImagesData="{Binding ImagesData, Mode=TwoWay}" 
+                        SelectedImageData="{Binding SelectedImageData, Mode=TwoWay}"
+                        MaxNumberOfImages="{Binding NumberOfImagesInPage, Mode=OneWay}"/>
+                    </StackPanel>
+               
+                    <!--Image Information-->
+                    <ContentControl Grid.Column="3" Grid.Row="1" Grid.RowSpan="1" Content="{Binding IsTouchApplication}"                    
+                        ContentTemplateSelector="{StaticResource InformationImageDataTemplateSelector}"
+                        Margin="0,10,33,5"/>
+
+                    <!-- Buttons -->
+                    <ContentControl Grid.Column="3" Grid.Row="3" Content="{Binding IsTouchApplication}"                    
+                            ContentTemplateSelector="{StaticResource MainButtonsDataTemplateSelector}"
+                            HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,30,0"/>
+                    
+                    <!--<Border Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Visibility="Collapsed"
+                          BorderBrush="Transparent" Background="Transparent"  BorderThickness="2" Margin="0,0,30,15">
+                        <ContentControl Grid.Column="3" Grid.Row="3" Content="{Binding IsTouchApplication}"                    
+                            ContentTemplateSelector="{StaticResource MainButtonsDataTemplateSelector}"
+                            HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,23,0"/>
+                        <Border.Effect>
+                            <DropShadowEffect Direction="-45" BlurRadius="4" ShadowDepth="7" Opacity="0.5"/>
+                        </Border.Effect>
+                    </Border>-->
+
+                    <!-- Current Image -->
+                    <core:ZoomImageUserControl  x:Name="ZoomImageUserControl" Grid.Column="2" Grid.Row="1"
+                        ImageSource="{Binding SelectedImageData.WriteableBitmapImage}"  
+                        ResultsSource="{Binding ImageNotesLayer}"
+                        HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"                                                 
+                        IsEnabled="{Binding IsLoadingImages, Mode=OneWay, Converter={StaticResource NegativeBooleanToEnabledConverter}}"
+                        Visibility="{Binding IsErrorOccured, Mode=OneWay, Converter={StaticResource NegativeBooleanToVisibilityConverter}}"
+                        Margin="10,10,10,10">
+                        <i:Interaction.Behaviors>
+                            <local:EventToCommandBehavior Command="{Binding GetCoordinatesCommand}" Event="DatasetCoordinatesGot" PassArguments="true" />
+                        </i:Interaction.Behaviors>
+                    </core:ZoomImageUserControl>
+
+
+                    <!--Loading images message-->
+                    <Border Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" 
+                            VerticalAlignment="Center" HorizontalAlignment="Center"
+                            BorderThickness="0" BorderBrush="Black" Background="Transparent"
+                            Visibility="{Binding IsLoadingImages, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" >
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20">
+                            <core:SpinningProgressBar x:Name="progressBar"
+                                 DockPanel.Dock="Left" SpinnerColor="DarkBlue"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 Height="45"/>
+                            <TextBlock Text="{Binding Path=Label_Loading_Images, Source={StaticResource Resources}}" VerticalAlignment="Center"
+                                HorizontalAlignment="Center" 
+                                FontWeight="DemiBold" Foreground="DarkBlue" FontSize="22" TextTrimming="CharacterEllipsis" 
+                                Margin="15,0,0,0" />
+                            <Button Style="{StaticResource NormalPressedButtonStyle}" Visibility="Collapsed"                                       
+                                Content="{Binding Path=Label_Cancel, Source={StaticResource Resources}}"                                               
+                                FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+                                Width="100" Height="40" 
+                                VerticalAlignment="Center" HorizontalAlignment="Right" Margin="20,3,0,0"      
+                                Command="{Binding AbortLoadingCommand}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!--Error message-->
+                    <Border Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="4" 
+                        BorderBrush="Red" BorderThickness="2" Background="White" 
+                        VerticalAlignment="Center" HorizontalAlignment="Stretch" CornerRadius="0" 
+                        Visibility="{Binding IsErrorOccured, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                        Margin="40,0,40,0">
+                        <TextBlock Text="{Binding ErrorMessage}" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                FontWeight="DemiBold" Foreground="Red" FontSize="22" TextWrapping="Wrap"
+                                Margin="10" />
+                        <Border.Effect>
+                            <DropShadowEffect Direction="-45" BlurRadius="4" ShadowDepth="7" Opacity="0.5"/>
+                        </Border.Effect>
+                    </Border>
+
+                    <!--Filters-->
+                    <Border Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Stretch"
+                          BorderBrush="Black" Background="White"  BorderThickness="2" Margin="20,0,10,15">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                        
+                             <!--Filters (Date from\Date To\File Name)-->
+                            <local:RemoteReportFiltersUserControl x:Name="FiltersUserControl" Grid.Column="0"                        
+                                HorizontalAlignment="stretch" VerticalAlignment="Bottom"
+                                Filters="{Binding Filters, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                        
+                                IsEnabled="{Binding IsLoadingImages, Mode=OneWay, Converter={StaticResource NegativeBooleanToEnabledConverter}}"                            
+                                ClearFiltersCommand="{Binding ClearFiltersCommand}"                            
+                                Margin="10,10,0,10">
+                            </local:RemoteReportFiltersUserControl>
+
+                            <!-- The SelectedPage UserControl -->
+                            <local:SelectPageUserControl Grid.Column="2" 
+                                Visibility="{Binding IsErrorOccured, Mode=OneWay, Converter={StaticResource NegativeBooleanToVisibilityCollapsedConverter}}"
+                                CurrentPage="{Binding ElementName=PaginationUserControl, Path=PageNumber, Mode=OneWay}"
+                                TotalPage="{Binding ElementName=PaginationUserControl, Path=TotalPages, Mode=OneWay}"
+                                PreviusCommand="{Binding PreviusCommand}" NextCommand="{Binding NextCommand}"
+                                HorizontalAlignment="Left" Margin="0,0,0,10">
+                                <i:Interaction.Behaviors>
+                                    <local:EventToCommandBehavior Command="{Binding ChangePageCommand}" Event="CurrenPageChanged" PassArguments="true" />
+                                </i:Interaction.Behaviors>
+                            </local:SelectPageUserControl>
+                        </Grid>
+                        <Border.Effect>
+                            <DropShadowEffect Direction="-45" BlurRadius="4" ShadowDepth="7" Opacity="0.5"/>
+                        </Border.Effect>
+                    </Border>
+
+                    <!--Filters Setting-->
+                    <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="2" 
+                             VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="148,0,0,105">
+                        <local:FiltersSetting  />
+                    </Grid>
+                </Grid>
+            </DockPanel>
+        </Border>
+</core:ToolWindow>

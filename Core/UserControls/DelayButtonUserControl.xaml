@@ -1,0 +1,41 @@
+﻿<local:DisposableUserControlBase x:Class="Core.DelayButtonUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Core"
+             mc:Ignorable="d">
+
+    <Grid  x:Name="LayoutRoot">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+
+            <Grid Grid.Column="0" Grid.Row="0">
+            <ContentControl Content="{Binding InnerButton}"/>
+
+                <ProgressBar x:Name="DelayProgressBar" Minimum="0" Maximum="100" Value="0" Visibility="Hidden" 
+                            Style="{StaticResource DelayButtonProgressBarStyle}"
+                            Margin="-2,-2,0,0"
+                            Background="Transparent"
+                            BorderBrush="{Binding ProgressBarBrush}"/>
+            </Grid>
+
+        <Popup x:Name="DelayPopUp" HorizontalAlignment="Center">
+            <Border Margin="1">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock  Background="White" Foreground="Black" 
+                            Height="20" Width="120"
+                            Text="{Binding PopUpMessage}"
+                            TextWrapping="Wrap"
+                            TextAlignment ="Center"/>
+                </StackPanel>
+            </Border>
+        </Popup>
+
+    </Grid>
+</local:DisposableUserControlBase>

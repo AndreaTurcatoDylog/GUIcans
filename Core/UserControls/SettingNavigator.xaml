@@ -1,0 +1,46 @@
+﻿<controls:DisposableUserControl x:Class="Core.SettingNavigator"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:Core"
+             xmlns:local="clr-namespace:Core"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+       
+        <controls:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" True="Visible" False="Collapsed"/>
+    </UserControl.Resources>
+
+    <Grid  x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Column="0" Grid.Row="0"
+                BorderBrush="Transparent" 
+                BorderThickness="1" Background="Transparent" Margin="7,0,0,0">
+
+            <ItemsControl ItemsSource="{Binding NavigatorButtons}"  Margin="10,0,0,0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="0,7,0,7"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </Border>
+
+        <controls:DynamicSettings  x:Name="DynamicSettigs" Grid.Column="0" Grid.Row="1"  
+                                           ItemSource="{Binding ItemSource, Mode=TwoWay}" Margin="10,0,0,0"/>
+
+    </Grid>
+
+</controls:DisposableUserControl>

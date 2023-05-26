@@ -1,0 +1,53 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Core">
+
+
+    <!--Empty bakground Border-->
+    <Style x:Key="EmptyBackgroundBorder" TargetType="{x:Type Border}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="LightBlue"/>
+        <Setter Property="Height" Value="60"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+
+    <!--Updated bakground Border-->
+    <Style x:Key="UpdateBackgroundBorder" TargetType="{x:Type Border}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="Height" Value="60"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Background" Value="{StaticResource GradiantDarkSlateGray}"/>
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsUpdated}" Value="false">
+                <Setter Property="Background" Value="{StaticResource GradiantDarkSlateGray}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding IsUpdated}" Value="true">
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="Black"/>
+                <Setter Property="Background"  Value="{StaticResource GradiantDarkOrange}"/>
+            </DataTrigger>
+
+            <!--<DataTrigger Binding="{Binding IsEnabled}" Value="false">
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="Black"/>
+                <Setter Property="Background"  Value="{StaticResource GradiantDarkSilver}"/>
+            </DataTrigger>-->
+        </Style.Triggers>
+    </Style>
+
+    <!--Not Updated bakground Border-->
+    <Style x:Key="NoUpdatedBackgroundBorder" TargetType="{x:Type Border}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="Height" Value="60"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="{StaticResource GradiantDarkSlateGray}"/>
+    </Style>
+
+</ResourceDictionary>

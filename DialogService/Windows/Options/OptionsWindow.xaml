@@ -1,0 +1,85 @@
+﻿<core:DialogBaseWindow x:Class="DialogService.OptionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"          
+        xmlns:core="clr-namespace:Core;assembly=Core"
+        xmlns:business="clr-namespace:Business;assembly=Business"
+        xmlns:local="clr-namespace:DialogService"
+        mc:Ignorable="d"
+        MinHeight="550" MinWidth="450" MaxHeight="750" MaxWidth="450" 
+        Background="Transparent" 
+        SizeToContent="WidthAndHeight" 
+        WindowStartupLocation="CenterScreen"  
+        ShowInTaskbar="False" ResizeMode="NoResize" 
+        WindowStyle="None" Topmost="True">
+
+    <Window.Resources>
+        <!--Converters-->
+        <core:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" True="Visible" False="Collapsed"/>
+        <core:BooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" True="Collapsed" False="Visible"/>
+    </Window.Resources>
+
+    <Border x:Name="LayoutRoot" BorderBrush="LightSlateGray" BorderThickness="1" CornerRadius="0" >
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!--Title rectangle-->
+            <Border Grid.Row="0" Background="DarkBlue" HorizontalAlignment="Stretch"
+                        BorderBrush="Black" BorderThickness="1" Height="40"  Margin="0,0,0,0">
+
+                <TextBlock Margin="5,1,0,1" Text="{Binding Path=Label_Options, Source={StaticResource Resources}}"
+                        LineHeight="22" FontSize="20" 
+                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                        Foreground="White"/>
+            </Border>
+
+            <!--Body rectangle-->
+            <Rectangle Grid.Row="1" Grid.RowSpan="2" 
+                          StrokeThickness="6">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0.9,0.5"  EndPoint="0,1" Opacity="0.8">
+                        <GradientStop Color="White" Offset="0"/>
+                        <GradientStop Color="Wheat" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <TabControl Grid.Row="1" Margin="0,10,0,0"  VerticalAlignment="Stretch">
+                <!--Language Manager-->
+                <core:TabItemClosable Header="{Binding Path=Label_Language, Source={StaticResource Resources}}">
+                    <core:LanguageManagerUserControl 
+                        ChoosenLanguageCode="{Binding Options.Language, Mode=TwoWay}"                        
+                        VerticalAlignment="Stretch"/>
+                </core:TabItemClosable>
+
+                <!--Image Manager-->
+                <core:TabItemClosable Header="{Binding Path=Label_Images_Title, Source={StaticResource Resources}}">
+                    <local:ImageOptions Options="{Binding Options,Mode=TwoWay}" VerticalAlignment="Stretch"/>
+                </core:TabItemClosable>
+
+                <!--PDF Manager-->
+                <core:TabItemClosable Header="{Binding Path=Label_Report, Source={StaticResource Resources}}">
+                    <local:PDFOptions Options="{Binding Options,Mode=TwoWay}" VerticalAlignment="Stretch"/>
+                </core:TabItemClosable>
+            </TabControl>
+
+            <StackPanel  Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                <!--Save Button-->
+                <Button Style="{StaticResource HighlightedPressedButtonStyle}"
+                    Content="{Binding Label_Save, Source={StaticResource Resources}}" Width="130" Height="43"               
+                    Margin="0,20,10,20"
+                    Command="{Binding SaveCommand}"/>
+                <!--Exit Button-->
+                <Button  Style="{StaticResource HighlightedPressedButtonStyle}"
+                    Content="{Binding Label_Cancel, Source={StaticResource Resources}}" Width="130" Height="43"               
+                    Margin="0,20,10,20"
+                    Command="{Binding ExitCommand}"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</core:DialogBaseWindow>

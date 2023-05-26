@@ -1,0 +1,166 @@
+﻿<local:DisposableUserControl x:Class="Core.DynamicParameters"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Core"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" True="Visible" False="Collapsed"/>
+        <local:BooleanToColorConverter x:Key="BooleanToIsRejectFoundBackGroundConverter" True="{StaticResource LinearIndianRed}" False="Transparent"/>
+        <local:BooleanToColorConverter x:Key="BooleanToIsRejectFoundBrushConverter" True="Black" False="Transparent"/>
+        <local:LabelToLanguageTextConverter x:Key="LabelToLanguageTextConverter" />
+
+        <!--Empty Type-->
+        <DataTemplate x:Key="EmptyDataTemplate">
+            <Border   Style="{StaticResource EmptyBackgroundBorder}" IsEnabled="False" Width="Auto"/>
+        </DataTemplate>
+
+        <!--Numeric Type-->
+        <DataTemplate x:Key="NumericDataTemplate">
+            <Border  Style="{StaticResource UpdateBackgroundBorder}"
+                     MouseLeftButtonDown="OnMouseLeftButtonDown" IsEnabled="{Binding IsEnabled}">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Visibility="Hidden"  Grid.Column="0" MouseLeftButtonDown="OnMouseLeftButtonDown">
+                        <Border x:Name="BorderValue"  Grid.Column="0"
+                                Background="{Binding IsRejectFound, Mode=TwoWay, Converter={StaticResource BooleanToIsRejectFoundBackGroundConverter}}"
+                                BorderBrush="{Binding IsRejectFound, Mode=TwoWay, Converter={StaticResource BooleanToIsRejectFoundBrushConverter}}" 
+                                BorderThickness="1,0,0,0">
+
+                            <local:NumericSliderUpDown  Margin="0,0,5,0"
+                                   VerticalAlignment="Center"  HorizontalAlignment="Stretch" Height="60"  Width="Auto" 
+                                   IsSliderVisible="True"
+                                   FontSize="15" FontWeight="Bold"
+                                   Padding="10"
+                                   NumericValue="{Binding Value, Mode=TwoWay, NotifyOnSourceUpdated=True}"
+                                   MinValue="{Binding Path=Options.(local:ISettingNumericOption.MinValue)}"
+                                   MaxValue="{Binding Path=Options.(local:ISettingNumericOption.MaxValue)}"
+                                   SourceUpdated="OnSourceUpdated"/>
+                        </Border>
+                    </Grid>
+
+                    <Grid Visibility="Visible" Grid.Column="0" MouseLeftButtonDown="OnMouseLeftButtonDown">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Popup x:Name="TitlePopUp" HorizontalAlignment="Center"  
+                             IsOpen="{Binding ElementName=BorderValue, Path=IsVisible, Mode=OneWay}"
+                             PlacementTarget="{Binding ElementName=TitleTextblock}"
+                             VerticalOffset="0" HorizontalOffset="0"
+                             Width="{Binding ElementName=TitleTextblock, Path=ActualWidth}"
+                             Placement="Top">
+                            <Border Margin="1"
+                                    Background="{StaticResource GradiantLightSteel}" BorderBrush="White">
+                                <TextBlock  Margin="1"
+                                    Height="{Binding ElementName=TitleTextblock, Path=ActualHeight}"
+                                    Width="{Binding ElementName=TitleTextblock, Path=ActualWidth}"
+                                    Text="{Binding Label}"
+                                    Background="AntiqueWhite" Foreground="Black" 
+                                    VerticalAlignment="Center"  HorizontalAlignment="Center"
+                                    FontSize="18"
+                                    FontWeight="Bold"
+                                    Padding="3,0,3,3" TextAlignment ="Center"  TextWrapping="Wrap"/>
+                            </Border>
+                        </Popup>
+
+
+                        <StackPanel Grid.Column="0" x:Name="TitleGrid" Orientation="Vertical">
+
+                            <!--Title-->
+                            <TextBlock x:Name="TitleTextblock" Margin="10,2,0,0"
+                                   Text="{Binding Label}"
+                                   Width="Auto" Foreground="White" VerticalAlignment="Top"  HorizontalAlignment="Left"
+                                   FontSize="20"
+                                   MouseLeftButtonDown="OnMouseLeftButtonDown"/>
+
+                            <!--Subtitle-->
+                            <TextBlock Margin="12,7,0,0"
+                                   Text="{Binding Subtitle}"
+                                   Width="Auto" Foreground="White" VerticalAlignment="Top"  HorizontalAlignment="Left"
+                                   FontSize="13"
+                                   MouseLeftButtonDown="OnMouseLeftButtonDown"/>
+                        </StackPanel>
+
+                        <Border Grid.Column="2" Visibility="Visible"
+                                 Background="{Binding IsRejectFound, Mode=TwoWay, Converter={StaticResource BooleanToIsRejectFoundBackGroundConverter}}"
+                                 BorderBrush="{Binding IsRejectFound, Mode=TwoWay, Converter={StaticResource BooleanToIsRejectFoundBrushConverter}}" 
+                                 BorderThickness="1,0,0,0">
+                            <TextBlock  Margin="20,10,25,5"
+                               Text="{Binding Value, Mode=TwoWay}" 
+                               Width="Auto" Height="38" Foreground="White" 
+                               VerticalAlignment="Center"  HorizontalAlignment="Center"
+                               FontSize="25"
+                               MouseLeftButtonDown="OnMouseLeftButtonDown" />
+                        </Border>
+
+                    </Grid>
+
+                    <local:ToggleButtonActive Grid.Column="1" 
+                                    Width="70" Height="30"
+                                    VerticalAlignment="Center"  HorizontalAlignment="Right" 
+                                    Margin="10"
+                                    IsChecked ="{Binding IsUsed, Mode=TwoWay}" IsEnabled="{Binding IsEnabled}"
+                                    Style="{StaticResource SwitchTypeToggleButton}" 
+                                    Visibility="Visible"/>
+
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!--BorderedItem-->
+        <Style x:Key="BorderedItem" TargetType="ListViewItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <ContentPresenter />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <EventSetter Event="RequestBringIntoView" Handler="OnRequestBringIntoView"/>
+        </Style>
+
+        <!--Data Template Selector-->
+        <local:SettingsDataTemplateSelector x:Key="SettingsDataTemplateSelector" />
+
+    </UserControl.Resources>
+
+    <Grid  x:Name="LayoutRoot">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                BorderBrush="Black" BorderThickness="{Binding SettingBorderThickness}" 
+                Background="{Binding SettingBorderBackground}">
+
+            <ListView x:Name="MainListView" Margin="0,0,0,0"  Background="Transparent" BorderThickness="0"
+                         HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        VirtualizingPanel.IsContainerVirtualizable="True"
+                        VirtualizingPanel.IsVirtualizing="True"
+                        ScrollViewer.CanContentScroll="True"
+                        VirtualizingStackPanel.VirtualizationMode="Recycling"
+                        ScrollViewer.IsDeferredScrollingEnabled="True"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                        ItemsSource="{Binding ItemSource, Mode=TwoWay}"
+                        ItemTemplateSelector="{StaticResource SettingsDataTemplateSelector}"
+                        ItemContainerStyle="{StaticResource BorderedItem}"
+                        ScrollViewer.ScrollChanged="ListViewScrollChanged">
+            </ListView>
+        </Border>
+
+    </Grid>
+    </local:DisposableUserControl>

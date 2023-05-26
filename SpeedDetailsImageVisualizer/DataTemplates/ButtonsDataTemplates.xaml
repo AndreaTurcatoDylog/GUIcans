@@ -1,0 +1,72 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:SpeedDetailsImageVisualizer"
+        xmlns:core="clr-namespace:Core;assembly=Core"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
+
+    <!--Converters-->
+    <core:BooleanToEnabledConverter x:Key="NegativeBooleanToEnabledConverter" True="false" False="true"/>
+    <core:BooleanToVisibilityConverter x:Key="NegativeBooleanToVisibilityCollapsedConverter" True="Collapsed" False="Visible"/>
+
+    <!--Normal Buttons  DataTemplate-->
+    <DataTemplate x:Key="NormalButtonsTemplate">
+        <StackPanel Orientation="Horizontal">
+            <Button Style="{StaticResource NormalPressedButtonStyle}"                                        
+                    Content="{Binding Path=Label_Create_Report, Source={StaticResource Resources}}"                    
+                    IsEnabled="{Binding ElementName=MainViewWindow, Path=DataContext.IsLoadingImages, Mode=OneWay, 
+                                Converter={StaticResource NegativeBooleanToEnabledConverter}}"
+                    FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+                    Width="138" Height="43" 
+                    VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,0,0"      
+                    Command="{Binding ElementName=MainViewWindow, Path=DataContext.CreateReportCommand}"/>
+            <!--<Button Style="{StaticResource NormalPressedButtonStyle}"                                        
+                        Content="{Binding Path=Label_Exit, Source={StaticResource Resources}}"                    
+                        IsEnabled="{Binding ElementName=MainViewWindow, Path=DataContext.IsLoadingImages, Mode=OneWay, 
+                                    Converter={StaticResource NegativeBooleanToEnabledConverter}}"
+                        FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+                        Width="138" Height="43" 
+                        Visibility="{Binding ElementName=MainViewWindow, Path=DataContext.IsChildApplication, 
+                            Converter={StaticResource NegativeBooleanToVisibilityCollapsedConverter}}"
+                        VerticalAlignment="Center" HorizontalAlignment="Right" Margin="20,0,0,0"                                   
+                        Command="{Binding ElementName=MainViewWindow, Path=DataContext.ExitCommand}"
+                        CommandParameter="{Binding ElementName=MainViewWindow}">
+            </Button>-->
+        </StackPanel>
+    </DataTemplate>
+
+    <!--Touch Buttons DataTemplate-->
+    <DataTemplate x:Key="TouchButtonsTemplate">
+        <StackPanel Orientation="Horizontal">
+            <core:ImageButton Style="{StaticResource CustomServiceButtonBaseStyle}"     
+                        ImageButtonPath="{StaticResource DT_PRODUCTS_003}"
+                        ImageButtonContentMargin="0,50,0,0"
+                        Content="{Binding Path=Label_Create_Report, Source={StaticResource Resources}}"                    
+                        IsEnabled="{Binding ElementName=MainViewWindow, Path=DataContext.IsLoadingImages, Mode=OneWay, 
+                                    Converter={StaticResource NegativeBooleanToEnabledConverter}}"
+                        FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+                        Width="120" Height="120"
+                        VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,0,0"      
+                        Command="{Binding ElementName=MainViewWindow, Path=DataContext.CreateReportCommand}">
+            </core:ImageButton>
+            <!--<core:ImageButton Style="{StaticResource CustomButtonExitStyle}"                                       
+                        Content="{Binding Path=Label_Exit, Source={StaticResource Resources}}"                    
+                        IsEnabled="{Binding ElementName=MainViewWindow, Path=DataContext.IsLoadingImages, Mode=OneWay, 
+                                    Converter={StaticResource NegativeBooleanToEnabledConverter}}"
+                        FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+                        Width="120" Height="120"
+                        Visibility="{Binding ElementName=MainViewWindow, Path=DataContext.IsChildApplication, 
+                            Converter={StaticResource NegativeBooleanToVisibilityCollapsedConverter}}"
+                        VerticalAlignment="Center" HorizontalAlignment="Right" Margin="20,0,0,0"                                   
+                        Command="{Binding ElementName=MainViewWindow, Path=DataContext.ExitCommand}"
+                        CommandParameter="{Binding ElementName=MainViewWindow}">
+            </core:ImageButton>-->
+        </StackPanel>
+    </DataTemplate>
+
+    <!--Buttons Template Selector-->
+    <local:MainButtonsDataTemplateSelector x:Key="MainButtonsDataTemplateSelector"               
+                NormalButtonsTemplate="{StaticResource NormalButtonsTemplate}"
+                TouchButtonsTemplate="{StaticResource TouchButtonsTemplate}"/>
+
+</ResourceDictionary>

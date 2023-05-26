@@ -1,0 +1,331 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:core="clr-namespace:Core;assembly=Core"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:local="clr-namespace:SpeedDetailsImageVisualizer">
+
+    <!--Converters-->
+    <core:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" True="Visible" False="Hidden"/>
+    <core:BooleanToVisibilityConverter x:Key="NegativeBooleanToVisibilityConverter" True="Hidden" False="Visible"/>
+    <core:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+    <core:MultiBooleanToVisibilityConverter x:Key="MultiBooleanToVisibilityConverter" True="Visible" False="Collapsed"/>
+
+    <!--InformationImageNormalTemplate-->
+    <DataTemplate x:Key="InformationImageNormalTemplate">
+        <Border x:Name="ImageInformationBorder" Grid.Row="0"
+            BorderThickness="1" BorderBrush="Black" Background="#ADCBF3"
+            HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+            Visibility="{Binding ElementName=MainViewWindow, Path=DataContext.IsErrorOccured, Mode=OneWay, Converter={StaticResource NegativeBooleanToVisibilityConverter}}"
+            Margin="0,0,0,10" >
+                <Border.Effect>
+                    <DropShadowEffect Direction="-45" BlurRadius="4" ShadowDepth="7" Opacity="0.5"/>
+                </Border.Effect>
+
+            <!--Information-->
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
+                <Grid 
+                    Visibility="{Binding ElementName=MainViewWindow, Path=DataContext.IsLoadingImages, Mode=OneWay, Converter={StaticResource NegativeBooleanToVisibilityConverter}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!--File Name-->
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="{Binding Path=Label_File_Name, Source={StaticResource Resources}}" Foreground="DarkBlue" FontSize="15" Margin="20,0,0,0"/>
+                        <TextBlock Grid.Column="1"
+                        Text="{Binding ElementName=MainViewWindow, Path=DataContext.SelectedImageData.FileName}" 
+                        FontSize="15" TextTrimming="CharacterEllipsis" 
+                        HorizontalAlignment="Left" Margin="0,5,0,0" />
+                    </Grid>
+
+                    <!--Timestamp-->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="{Binding Path=Label_Date_Time, Source={StaticResource Resources}}" Foreground="DarkBlue" FontSize="15" Margin="20,0,0,0"/>
+                        <TextBlock Grid.Column="1"
+                        Text="{Binding ElementName=MainViewWindow, Path=DataContext.SelectedImageData.TimeStamp}" 
+                        FontSize="15" TextTrimming="CharacterEllipsis" 
+                        HorizontalAlignment="Left" Margin="0,5,0,0" />
+                    </Grid>
+
+                    <!--Cause -->
+                    <Grid Grid.Row="4" Margin="0,0,0,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Content="{Binding Path=Label_Cause, Source={StaticResource Resources}}"
+                                Foreground="DarkBlue" FontSize="15" Margin="20,0,0,0"/>
+                        <Separator  Grid.Row="1" Margin="20,0,20,0" BorderBrush="Black" BorderThickness="1" />
+                        <TextBox x:Name="CauseTextBox" Grid.Row="2" Text="{Binding ElementName=MainViewWindow, Path=DataContext.CurrentCause}"                            
+                              MinHeight="100"
+                            TextWrapping="Wrap" AcceptsReturn="True"
+                            FontSize="15" Margin="20,5,20,0">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:InvokeCommandAction 
+                                             Command="{Binding ElementName=MainViewWindow, Path=DataContext.SetImageInformationCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+                    </Grid>
+
+                    <!--Action -->
+                    <Grid Grid.Row="5" Margin="0,0,0,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Content="{Binding Path=Label_Action, Source={StaticResource Resources}}"  
+                                    Foreground="DarkBlue" FontSize="15" Margin="20,0,0,0"/>
+                        <Separator  Grid.Row="1" Margin="20,0,20,0" BorderBrush="Black" BorderThickness="1" />
+                        <TextBox x:Name="ActionTextBox" Grid.Row="2" Text="{Binding ElementName=MainViewWindow, Path=DataContext.CurrentAction}"                            
+                            VerticalAlignment="Stretch" MinHeight="100"
+                            TextWrapping="Wrap" AcceptsReturn="True"
+                            FontSize="15" Margin="20,5,20,5">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:InvokeCommandAction 
+                                    Command="{Binding ElementName=MainViewWindow, Path=DataContext.SetImageInformationCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+                    </Grid>
+
+                    <!--Additional and Comments-->
+                    <StackPanel Orientation="Vertical" Grid.Row="6">
+                        <Grid Margin="0,0,0,15" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.Visibility>
+                                <MultiBinding Converter="{StaticResource MultiBooleanToVisibilityConverter}">
+                                    <Binding ElementName="MainViewWindow" Path="DataContext.ShowAdditional" Mode="OneWay"/>
+                                    <Binding ElementName="MainViewWindow" Path="DataContext.IsErrorOccured" Converter="{StaticResource InverseBooleanConverter}" Mode="OneWay" UpdateSourceTrigger="PropertyChanged"/>
+                                    <Binding ElementName="MainViewWindow" Path="DataContext.IsLoadingImages" Converter="{StaticResource InverseBooleanConverter}" Mode="OneWay" UpdateSourceTrigger="PropertyChanged"/>
+                                </MultiBinding>
+                            </Grid.Visibility>
+
+                            <!--Additional-->
+                            <Label Grid.Row="0" Content="{Binding Path=Label_Additional, Source={StaticResource Resources}}"  
+                                Foreground="DarkBlue" FontSize="15" Margin="20,0,0,0"/>
+                            <Separator  Grid.Row="1" Margin="20,0,20,0" BorderBrush="Black" BorderThickness="1" />
+                            <TextBox Grid.Row="2" Text="{Binding ElementName=MainViewWindow, Path=DataContext.AdditionalContent, Mode=OneWay}"                                          
+                                VerticalAlignment="Stretch" MinHeight="100" IsReadOnly="True" IsEnabled="False"
+                                TextWrapping="Wrap" AcceptsReturn="True"
+                                FontSize="15" Margin="20,5,20,0"/>
+                        </Grid>
+
+                        <!--Global Comments-->
+                        <Grid Margin="0,0,0,15" Grid.Row="4">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.Visibility>
+                                <MultiBinding Converter="{StaticResource MultiBooleanToVisibilityConverter}">
+                                    <Binding ElementName="MainViewWindow" Path="DataContext.IsErrorOccured" Converter="{StaticResource InverseBooleanConverter}" Mode="OneWay" UpdateSourceTrigger="PropertyChanged"/>
+                                    <Binding ElementName="MainViewWindow" Path="DataContext.IsLoadingImages" Converter="{StaticResource InverseBooleanConverter}" Mode="OneWay" UpdateSourceTrigger="PropertyChanged"/>
+                                </MultiBinding>
+                            </Grid.Visibility>
+
+                            <Label Grid.Row="0" Content="{Binding Path=Label_Comments, Source={StaticResource Resources}}"  
+                                     Foreground="DarkBlue" FontSize="15" Margin="20,0,0,0"/>
+                            <Separator  Grid.Row="1" Margin="20,0,20,0" BorderBrush="Black" BorderThickness="1" />
+                            <TextBox Grid.Row="2" Text="{Binding ElementName=MainViewWindow, Path=DataContext.GlobalCommentContent, Mode=TwoWay}"                                          
+                                VerticalAlignment="Stretch" MinHeight="100"
+                                TextWrapping="Wrap" AcceptsReturn="True"
+                                FontSize="15" Margin="20,5,20,0"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </Border>
+    </DataTemplate>
+
+    <!--InformationImageTouchTemplate-->
+    <DataTemplate x:Key="InformationImageTouchTemplate">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0"
+                        BorderThickness="1" BorderBrush="Black" Background="#ADCBF3"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Visibility="{Binding ElementName=MainViewWindow, Path=DataContext.IsErrorOccured, Mode=OneWay, Converter={StaticResource NegativeBooleanToVisibilityConverter}}"
+                        Margin="25,21,0,10" >
+                <Border.Effect>
+                    <DropShadowEffect Direction="-45" BlurRadius="4" ShadowDepth="7" Opacity="0.5"/>
+                </Border.Effect>
+
+                <Grid Visibility="{Binding ElementName=MainViewWindow, Path=DataContext.IsLoadingImages, Mode=OneWay, Converter={StaticResource NegativeBooleanToVisibilityConverter}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!--File Name-->
+                    <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,5,0,5">
+                        <Label Content="{Binding Path=Label_File_Name, Source={StaticResource Resources}}" Foreground="DarkBlue" FontSize="15" Margin="20,0,0,0"/>
+                        <Separator Margin="20,0,20,0" BorderBrush="Black" BorderThickness="1" />
+                        <TextBlock Text="{Binding ElementName=MainViewWindow, Path=DataContext.SelectedImageData.FileName}" FontSize="15" Margin="20,5,20,0" TextTrimming="CharacterEllipsis" />
+                    </StackPanel>
+
+                    <!--Timestamp-->
+                    <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0,0,0,5">
+                        <Label Content="{Binding Path=Label_Date_Time, Source={StaticResource Resources}}" Foreground="DarkBlue" FontSize="15" Margin="20,0,0,0"/>
+                        <Separator Margin="20,0,20,0" BorderBrush="Black" BorderThickness="1" />
+                        <TextBlock Text="{Binding ElementName=MainViewWindow, Path=DataContext.SelectedImageData.TimeStamp}" FontSize="15" Margin="20,5,0,0" TextTrimming="CharacterEllipsis"/>
+                    </StackPanel>
+
+                    <!--Cause -->
+                    <Grid Grid.Row="2" Margin="0,0,0,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Content="{Binding Path=Label_Cause, Source={StaticResource Resources}}"
+                                    Foreground="DarkBlue" FontSize="15" Margin="20,0,0,0"/>
+                        <Separator  Grid.Row="1" Margin="20,0,20,0" BorderBrush="Black" BorderThickness="1" />
+                        <core:TextBoxKeyboard Grid.Row="2" Text="{Binding ElementName=MainViewWindow, Path=DataContext.CurrentCause}"                            
+                            VerticalAlignment="Stretch"  
+                            TextWrapping="Wrap" AcceptsReturn="True"
+                            FontSize="15" Margin="20,5,20,0">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:InvokeCommandAction 
+                                    Command="{Binding ElementName=MainViewWindow, Path=DataContext.SetImageInformationCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </core:TextBoxKeyboard>
+                    </Grid>
+
+                    <!--Action -->
+                    <Grid Grid.Row="3" Margin="0,0,0,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Content="{Binding Path=Label_Action, Source={StaticResource Resources}}"  
+                                    Foreground="DarkBlue" FontSize="15" Margin="20,0,0,0"/>
+                        <Separator  Grid.Row="1" Margin="20,0,20,0" BorderBrush="Black" BorderThickness="1" />
+                        <core:TextBoxKeyboard  Grid.Row="2" Text="{Binding ElementName=MainViewWindow, Path=DataContext.CurrentAction}"                            
+                            VerticalAlignment="Stretch"     
+                            TextWrapping="Wrap" AcceptsReturn="True"
+                            FontSize="15" Margin="20,5,20,5">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:InvokeCommandAction 
+                                    Command="{Binding ElementName=MainViewWindow, Path=DataContext.SetImageInformationCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </core:TextBoxKeyboard>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <!--Additional-->
+            <Border x:Name="AdditionalInformationBorder" Grid.Row="1"
+                        BorderThickness="1" BorderBrush="Black" Background="#ADCBF3"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                               
+                        Margin="25,0,0,10">
+                <Border.Visibility>
+                    <MultiBinding Converter="{StaticResource MultiBooleanToVisibilityConverter}">
+                        <Binding ElementName="MainViewWindow" Path="DataContext.ShowAdditional" Mode="OneWay"/>
+                        <Binding ElementName="MainViewWindow" Path="DataContext.IsErrorOccured" Converter="{StaticResource InverseBooleanConverter}" Mode="OneWay" UpdateSourceTrigger="PropertyChanged"/>
+                        <Binding ElementName="MainViewWindow" Path="DataContext.IsLoadingImages" Converter="{StaticResource InverseBooleanConverter}" Mode="OneWay" UpdateSourceTrigger="PropertyChanged"/>
+                    </MultiBinding>
+                </Border.Visibility>
+                <Border.Effect>
+                    <DropShadowEffect Direction="-45" BlurRadius="4" ShadowDepth="7" Opacity="0.5"/>
+                </Border.Effect>
+
+                <!--Additional.TXT Content -->
+                <Grid Margin="0,0,0,15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Content="{Binding Path=Label_Additional, Source={StaticResource Resources}}"  
+                                Foreground="DarkBlue" FontSize="15" Margin="20,0,0,0"/>
+                    <Separator  Grid.Row="1" Margin="20,0,20,0" BorderBrush="Black" BorderThickness="1" />
+                    <TextBox Grid.Row="2" Text="{Binding ElementName=MainViewWindow, Path=DataContext.AdditionalContent, Mode=OneWay}"                                          
+                                VerticalAlignment="Stretch" Height="120" IsReadOnly="True" IsEnabled="False"
+                                TextWrapping="Wrap" AcceptsReturn="True"
+                                FontSize="15" Margin="20,5,20,0"/>
+                </Grid>
+            </Border>
+
+            <!--Global Comments-->
+            <Border x:Name="GlobalCommentsBorder" Grid.Row="2"
+                        BorderThickness="1" BorderBrush="Black" Background="#ADCBF3"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                               
+                        Margin="25,0,0,10">
+                <Border.Visibility>
+                    <MultiBinding Converter="{StaticResource MultiBooleanToVisibilityConverter}">
+                        <Binding ElementName="MainViewWindow" Path="DataContext.IsErrorOccured" Converter="{StaticResource InverseBooleanConverter}" Mode="OneWay" UpdateSourceTrigger="PropertyChanged"/>
+                        <Binding ElementName="MainViewWindow" Path="DataContext.IsLoadingImages" Converter="{StaticResource InverseBooleanConverter}" Mode="OneWay" UpdateSourceTrigger="PropertyChanged"/>
+                    </MultiBinding>
+                </Border.Visibility>
+                <Border.Effect>
+                    <DropShadowEffect Direction="-45" BlurRadius="4" ShadowDepth="7" Opacity="0.5"/>
+                </Border.Effect>
+
+                <!--GlobalComment.TXT Content -->
+                <Grid Margin="0,0,0,15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Content="{Binding Path=Label_Comments, Source={StaticResource Resources}}"  
+                        Foreground="DarkBlue" FontSize="15" Margin="20,0,0,0"/>
+                    <Separator  Grid.Row="1" Margin="20,0,20,0" BorderBrush="Black" BorderThickness="1" />
+                    <core:TextBoxKeyboard Grid.Row="2" Text="{Binding ElementName=MainViewWindow, Path=DataContext.GlobalCommentContent, Mode=TwoWay}"                                          
+                        VerticalAlignment="Stretch" Height="120" 
+                        TextWrapping="Wrap" AcceptsReturn="True"
+                        FontSize="15" Margin="20,5,20,0"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </DataTemplate>
+
+    <!--Information Image (Cause and Action) Template Selector-->
+    <local:InformationImageDataTemplateSelector x:Key="InformationImageDataTemplateSelector"               
+                NormalTextBoxesTemplate="{StaticResource InformationImageNormalTemplate}"
+                TouchTextBoxesTemplate="{StaticResource InformationImageTouchTemplate}"/>
+    
+</ResourceDictionary>

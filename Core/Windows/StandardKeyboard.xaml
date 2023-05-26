@@ -1,0 +1,137 @@
+﻿<local:KeyboardBase x:Class="Core.StandardKeyboard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Core"
+             mc:Ignorable="d"
+             Background="Transparent" 
+             ResizeMode="NoResize" 
+             ShowInTaskbar="False" 
+             AllowsTransparency="True"
+             WindowStyle="None" Topmost="True"
+             SizeToContent="WidthAndHeight"
+             Loaded="OnLoaded"
+             PreviewKeyDown="OnPreviewKeyDown"
+             TextInput="OnTextInput"
+             PreviewKeyUp="OnPreviewKeyUp"
+            IsVisibleChanged="OnIsVisibleChanged">
+
+    <Window.Resources>
+        <RadialGradientBrush x:Key="SteelBlue" Center="0.1,0.0" GradientOrigin="0.1,0">
+            <GradientStop Color="LightSteelBlue" Offset="0" />
+            <GradientStop Color="SteelBlue" Offset="1.0" />
+        </RadialGradientBrush>
+    </Window.Resources>
+
+    <Grid Name="LayoutRoot" Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Column="0" Grid.Row="0" BorderThickness="1,1,1,1" 
+                Background="{StaticResource KeyboarsBackgroundBrush}" BorderBrush="{StaticResource KeyboarsMarginBrush}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" 
+                        VerticalAlignment="Top">
+
+                <!--Alphabetic\Special Characters-->
+                <StackPanel Orientation="Vertical" 
+                         Margin="10,10,10,0">
+
+                    <!--First line of kyes-->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                        <Button Content="{Binding Path=CurrentDictionary[00]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[01]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[02]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[03]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[04]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[05]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[06]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[07]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[08]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[09]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                    </StackPanel>
+
+                    <!--Second line of kyes-->
+                    <StackPanel Orientation="Horizontal" Margin="30,0,0,0">
+                        <Button Content="{Binding Path=CurrentDictionary[010]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[011]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[012]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[013]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[014]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[015]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[016]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[017]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[018]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                    </StackPanel>
+
+                    <!--Third line of kyes-->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                        <Button x:Name="CapsKeybordButton" Style="{StaticResource CapsKeybordButtonStyle}" PreviewMouseDown="OnCpasButtonClick" PreviewTouchDown="OnCpasButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[019]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[020]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[021]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[022]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[023]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[024]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[025]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button x:Name="BackspaceKeybordButton" Style="{StaticResource BackspaceKeybordButtonStyle}" PreviewMouseDown="OnBackspaceButtonClick" PreviewTouchDown="OnBackspaceButtonTouchDown"/>
+                    </StackPanel>
+
+                    <!--Fourth line of kyes-->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                        <Button x:Name="SpecialKeyboardButton" Content="@ # " Style="{StaticResource SpecialKeybordButtonStyle}" PreviewMouseDown="OnSpecialButtonClick" PreviewTouchDown="OnSpecialButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[026]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[027]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button x:Name="SpaceKeyboardButton" Content="{Binding Path=CurrentDictionary[028]}" Style="{StaticResource SpaceKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[029]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        <Button Content="{Binding Path=CurrentDictionary[030]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnDecimalSeparatorButtonClick" PreviewTouchDown="OnDecimalSeparatorButtonTouchDown"/>
+                        <Button x:Name="EnterKeybordButton" Content="" Style="{StaticResource EnterKeybordButtonStyle}" PreviewMouseDown="OnEnterButtonClick" PreviewTouchDown="OnEnterButtonTouchDown"/>
+                    </StackPanel>
+
+                </StackPanel>
+
+                <!--Numeric Characters-->
+                <StackPanel Orientation="Horizontal">
+
+                    <StackPanel Orientation="Vertical" Margin="15,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                        <!--First line of kyes-->
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="{Binding Path=NumericCharacters[033], Mode=TwoWay}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                            <Button Content="{Binding Path=NumericCharacters[032], Mode=TwoWay}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                            <Button Content="{Binding Path=NumericCharacters[031], Mode=TwoWay}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        </StackPanel>
+
+                        <!--Second line of kyes-->
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="{Binding Path=NumericCharacters[036]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                            <Button Content="{Binding Path=NumericCharacters[035]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                            <Button Content="{Binding Path=NumericCharacters[034]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        </StackPanel>
+
+                        <!--Third line of kyes-->
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="{Binding Path=NumericCharacters[039]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                            <Button Content="{Binding Path=NumericCharacters[038]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                            <Button Content="{Binding Path=NumericCharacters[037]}" Style="{StaticResource NormalKeybordButtonStyle}" PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                        </StackPanel>
+
+                        <!--Fourth line of kyes-->
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                            <Button Content="{Binding Path=NumericCharacters[040]}" Style="{StaticResource DoubleSizeKeybordButtonStyle}"  PreviewMouseDown="OnNormalButtonClick" PreviewTouchDown="OnNormalButtonTouchDown"/>
+                            <Button x:Name="EscapeKeyboardButton" Style="{StaticResource ExitKeybordButtonStyle}"  PreviewMouseDown="OnExitButtonClick" PreviewTouchDown="OnExitButtonTouchDown"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</local:KeyboardBase>
