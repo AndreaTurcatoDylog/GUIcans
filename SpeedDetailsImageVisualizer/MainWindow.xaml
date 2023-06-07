@@ -293,13 +293,14 @@
                     <!-- Current Image -->
                 <core:ZoomImageUserControl  x:Name="ZoomImageUserControl" Grid.Column="2" Grid.Row="1"
                         ImageSource="{Binding SelectedImageData.WriteableBitmapImage}"  
-                        ResultsSource="{Binding ImageNotesLayer}"
+                        ResultsSource="{Binding ImageNotesLayer, Mode=TwoWay}"
                         HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"                                                 
                         IsEnabled="{Binding IsLoadingImages, Mode=OneWay, Converter={StaticResource NegativeBooleanToEnabledConverter}}"
                         Visibility="{Binding IsErrorOccured, Mode=OneWay, Converter={StaticResource NegativeBooleanToVisibilityConverter}}"
                         Margin="10,10,10,10">
                         <i:Interaction.Behaviors>
                             <local:EventToCommandBehavior Command="{Binding GetCoordinatesCommand}" Event="DatasetCoordinatesGot" PassArguments="true" />
+                            <local:EventToCommandBehavior Command="{Binding ClearCoordinatesCommand}" Event="ClearCoordinatesButtonPressed" PassArguments="true" />
                         </i:Interaction.Behaviors>
                     </core:ZoomImageUserControl>
 

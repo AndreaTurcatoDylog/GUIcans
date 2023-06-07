@@ -315,9 +315,6 @@
     <Compile Include="UserControls\SpinningProgressBar.xaml.cs">
       <DependentUpon>SpinningProgressBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ZoomImageUserControlOLD.xaml.cs">
-      <DependentUpon>ZoomImageUserControlOLD.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\BlockedKeyboardWindow.xaml.cs">
       <DependentUpon>BlockedKeyboardWindow.xaml</DependentUpon>
     </Compile>
@@ -474,10 +471,6 @@
     <Page Include="UserControls\ZC\ZoomImageUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\ZoomImageUserControlOLD.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\BlockedKeyboardWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

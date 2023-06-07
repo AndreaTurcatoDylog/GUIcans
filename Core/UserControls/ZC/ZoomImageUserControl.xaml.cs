@@ -9,6 +9,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.IO;
+using System.Text;
 
 namespace Core
 {
@@ -109,6 +111,7 @@ namespace Core
         public event EventHandler ImageZoomed;
         public event EventHandler ImageScrolled;
         public event EventHandler DatasetCoordinatesGot;
+        public event EventHandler ClearCoordinatesButtonPressed;
 
         // The ImageMouseDownWithoutTransformation is fired if a click on image occurs 
         // whithout transformation (Translate or Zoom). The MouseX and MouseY coordinates on Image are
@@ -116,6 +119,9 @@ namespace Core
         public event EventHandler ImageMouseDownWithoutTransformation;
 
         #endregion
+
+        public ICommand ClearPointsCommand { get; private set; }
+
 
         #region Properties
 
@@ -125,7 +131,10 @@ namespace Core
         public bool CanChooseCoordinates
         {
             get { return (bool)GetValue(CanChooseCoordinatesProperty); }
-            set { SetValue(CanChooseCoordinatesProperty, value); }
+            set
+            {
+                SetValue(CanChooseCoordinatesProperty, value);
+            }
         }
 
         /// <summary>
@@ -413,6 +422,10 @@ namespace Core
 
             // Set the DataContext
             LayoutRoot.DataContext = this;
+
+
+
+            ClearPointsCommand = new RelayCommand(ClearPointsCommandExecute);
         }
 
         #endregion
@@ -718,6 +731,14 @@ namespace Core
         private void TriggerDatasetCoordinatesGot(object sender, EventArgs pointEventArgs)
         {
             DatasetCoordinatesGot?.Invoke(sender, pointEventArgs);
+        }
+
+        /// <summary>
+        /// Trigger the Dataset Coordinates Got
+        /// </summary>
+        private void TriggerClearCoordinatesButtonPressed(object sender, EventArgs e)
+        {
+            ClearCoordinatesButtonPressed?.Invoke(sender, e);
         }
 
         #endregion
@@ -1169,9 +1190,30 @@ namespace Core
                 {
                     var position = GetImageCoordsAt(image, e);
                     TriggerDatasetCoordinatesGot(sender, new PointEventArgs(position));
+
+                    //writing the coordinate to a text file
+                    StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + "\\..\\..\\..\\CatRom_coordinates.txt", true, Encoding.ASCII);
+                    sw.Write("X = " + position.X + " Y = " + position.Y + System.Environment.NewLine);
+                    sw.Close();
                 }
             }
         }
+
+
+        /// <summary>
+        /// Occurs when the clear button is clicked
+        /// </summary>
+        private void ClearPointsCommandExecute(object sender)
+        {
+            TriggerClearCoordinatesButtonPressed(sender, new EventArgs());
+            try
+            {
+                //<------------GOTTA FIND A WAY TO DELETE THE POINTS ON THE BITMAP WHEN I PRESS THIS BUTTON
+                File.Delete(Directory.GetCurrentDirectory() + "\\..\\..\\..\\CatRom_coordinates.txt");
+            }
+            catch { }
+        }
+
 
         #endregion       
     }

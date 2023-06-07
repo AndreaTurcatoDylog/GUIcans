@@ -254,11 +254,11 @@ namespace Business
                         CanMoveNext = ImageIndex < NumberOfImages;
 
                         //additional bitmap layer to draw OVER the image
-                        ImageNotesLayer = new WriteableBitmap(_SelectedImageData.WriteableBitmapImage.PixelWidth, _SelectedImageData.WriteableBitmapImage.PixelHeight, _SelectedImageData.WriteableBitmapImage.DpiX, _SelectedImageData.WriteableBitmapImage.DpiY, PixelFormats.Pbgra32, BitmapPalettes.Halftone8Transparent);
+                        ImageNotesLayer = new WriteableBitmap(_SelectedImageData.WriteableBitmapImage.PixelWidth, _SelectedImageData.WriteableBitmapImage.PixelHeight, _SelectedImageData.WriteableBitmapImage.DpiX, _SelectedImageData.WriteableBitmapImage.DpiY, PixelFormats.Bgra32, null);
                         
                         //setting the image pixels as transparent
                         byte[] pixels = new byte[ImageNotesLayer.PixelHeight * ImageNotesLayer.PixelWidth * ImageNotesLayer.Format.BitsPerPixel / 8];
-                        for (int i = 0; i < pixels.Length; i++) pixels[i] = 120;
+                        for (int i = 0; i < pixels.Length; i++) pixels[i] = 0;
                         ImageNotesLayer.WritePixels(
                             new Int32Rect(0, 0, ImageNotesLayer.PixelWidth, ImageNotesLayer.PixelHeight),
                             pixels,
@@ -628,6 +628,11 @@ namespace Business
         public ICommand SetCoordinatesCommand { get; private set; }
 
         /// <summary>
+        /// clear the coordinates taken
+        /// </summary>
+        public ICommand ClearCoordinatesCommand { get; private set; }
+
+        /// <summary>
         /// Get\Set the ExitCommand
         /// </summary>
         public ICommand ExitCommand { get; private set; }
@@ -686,13 +691,8 @@ namespace Business
             LoadCommand = new RelayCommand(LoadExecute);
             AbortLoadingCommand = new RelayCommand(AbortLoadingExecute);
             ChangePageCommand = new RelayCommand<ChangePageEventArgs>(ChangePageExecute);
-            GetCoordinatesCommand = new RelayCommand<PointEventArgs>(GetCoordinatesExecute);
-
-
-
-            SetCoordinatesCommand = new RelayCommand<PointEventArgs>(SetCoordinatesExecute);
-
-            
+            GetCoordinatesCommand = new RelayCommand<PointEventArgs>(GetCoordinatesExecute);            
+            ClearCoordinatesCommand = new RelayCommand<EventArgs>(ClearCoordinatesExecute);            
         }
 
         #endregion
@@ -1955,39 +1955,43 @@ namespace Business
             {
                 _DatasetCoordinates.Add(coordinates.Coordinates);
 
+                // drawing a cross over the dataset point
                 for (int i = 0; i < _DatasetCoordinates.Count; i++)
                 {
-                    var width = 10;
-                    var height = 10;
-                    var stride = (width * ImageNotesLayer.Format.BitsPerPixel + 7) / 8;
-                    var rect = new Int32Rect((int)_DatasetCoordinates[i].X, (int)_DatasetCoordinates[i].Y, width, height);
-                    //var buffer = Enumerable.Range(0, stride * height).Select(j => (byte)255).ToArray();
-                    int[] buffer = { 0, 0, 0, 0 };
-                   // ImageNotesLayer.WritePixels(rect, buffer, stride, 0);
+                    try
+                    {
+                        var width = 7;
+                        var height = 7;
+                        var X_coord = (int)_DatasetCoordinates[i].X - width / 2;
+                        var Y_coord = (int)_DatasetCoordinates[i].Y - height / 2;
+
+                        var rect = new Int32Rect(X_coord, Y_coord, width, height);
+
+                        var stride = (width * ImageNotesLayer.Format.BitsPerPixel + 7) / 8;
+                        byte[] colorData = new byte[stride * height];
+
+                        for (int j = 0; j < width; j ++)
+                        {
+                            for (int k = 0; k < height; k++)
+                            {
+                                if ( j == k  || j == height - k - 1) // cross pattern
+                                {
+                                    colorData[(height * k + j) * ImageNotesLayer.Format.BitsPerPixel / 8 + 0 ] = 0; // B blue
+                                    colorData[(height * k + j) * ImageNotesLayer.Format.BitsPerPixel / 8 + 1 ] = 0; // G green
+                                    colorData[(height * k + j) * ImageNotesLayer.Format.BitsPerPixel / 8 + 2 ] = 255; // R red
+                                    colorData[(height * k + j) * ImageNotesLayer.Format.BitsPerPixel / 8 + 3 ] = 255; // A alpha
+                                }
+                            }
+                        }
+                        ImageNotesLayer.WritePixels(rect, colorData, stride, 0);
+                    }
+                    catch
+                    {
+                        //this handles the case where I try to create a point on the edge of the image
+                    }
                 }
             }
         }
-
-
-        //<----------------------------------------------------------TOTEST
-        /// <summary>
-        /// Occurs to Set the Coordinates
-        /// </summary>
-        private void SetCoordinatesExecute(object param)
-        {
-                for (int i = 0; i < _DatasetCoordinates.Count; i++)
-                {
-                    var width = 10;
-                    var height = 10;
-                    var stride = (width * ImageNotesLayer.Format.BitsPerPixel + 7) / 8;
-                    var rect = new Int32Rect((int)_DatasetCoordinates[i].X, (int)_DatasetCoordinates[i].Y, width, height);
-                    //var buffer = Enumerable.Range(0, stride * height).Select(j => (byte)255).ToArray();
-                    int[] buffer = { 0, 0, 0, 0 };
-                    ImageNotesLayer.WritePixels(rect, buffer, stride, 0);
-                }
-        }
-
-
         /// <summary>
         /// Open the Folder Dialog to choose a folder
         /// </summary>
@@ -2025,6 +2029,18 @@ namespace Business
             {
                 _Log.Debug(ex.Message);
             }
+        }
+
+        private void ClearCoordinatesExecute(object param)
+        {
+            _DatasetCoordinates.Clear();
+
+            //clear the bitmap
+            Int32Rect rect = new Int32Rect(0, 0, ImageNotesLayer.PixelWidth, ImageNotesLayer.PixelHeight);
+            int bytesPerPixel = ImageNotesLayer.Format.BitsPerPixel / 8;
+            byte[] empty = new byte[rect.Width * rect.Height * bytesPerPixel]; // cache this one
+            int emptyStride = rect.Width * bytesPerPixel;
+            ImageNotesLayer.WritePixels(rect, empty, emptyStride, 0);
         }
 
         #endregion
